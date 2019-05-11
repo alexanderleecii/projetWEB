@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'playlist/css/playlist.css' %}">
+{% block pagecontent %}
+<div class="container p-0">
+	<div class="row w-100 m-0">
+		<div class="row w-100 m-0">
+			<h1 class="text-center w-100 m-auto">{{ Playlist.name }}</h1>
+		</div>
+		<div class="row w-100 m-0">
+			<div class="col-6 w-100 p-0 m-auto text-center">
+				Date de création : {{ Playlist.creation_date }}
+			</div>
+			<div class="col-6 w-100 p-0 m-auto text-center">
+				Dernière mise-à-jour : {{ Playlist.update_date }}
+			</div>
+		</div>
+	</div>
+
+	<div class="row w-100 m-0">
+		<table>
+			<tr>
+				<th>Titre</th>
+				<th>Artiste</th>
+				<th>Album</th>
+				<th>Date d'ajout</th>
+				<th>Durée</th>
+			</tr>
+			{% for song,date in Songs %}
+			<tr>
+				<th>{{ song.title }}</th>
+				<th></th>
+				<th></th>
+				<th>{{ date|date:"d/m/y" }}</th>
+				<th>{{ song.duration }}</th>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+	<div class="row w-100 m-0">
+
+	</div>
+</div>
+{% endblock %}

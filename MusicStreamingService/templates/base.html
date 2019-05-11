@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+	<head>
+		<title>FRZN. - Music Streaming Service</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/mainstyle.css' %}">
+	</head>
+	<body>
+		<div class="row h-100 w-100">	
+			<div class="col-md-3 d-none d-md-block bg-dark h-100">
+				<div class="row d-block w-100">
+					<div id="logo" class="text-center">
+						<a href="/browse/"><img src="static/img/logo.jpg"></a>
+					</div>
+				</div>
+				<div class="row text-center w-100">
+					<div id="display_user" class="text-center">
+						User
+						<img src="user/media/img/user_avatar/frozone.jpg">
+					</div>
+				</div>
+				<div class="row w-100">
+					<nav id="nav_frzn" class="nav flex-column text-center">
+						<a href="/user/1/" class="nav-link text-light w-100 d-block">Mon profil</a></li>
+						<a href="/browse/" class="nav-link text-light w-100 d-block">Accueil</a></li>
+					</nav>
+				</div>
+				<div class="row w-100">
+					<footer id="footer" class="text-center">
+						<a href="/contact/" class="text-light d-block">Contact</a>
+						<a href="https://github.com/alexanderleecii/" target="_blank" class="text-light d-block">Couchy Alexander-Lee</a>
+					</footer>
+				</div>
+			</div>
+
+			<div class="mainsection col-md-9">
+			<section>
+				{% block pagecontent %}{% endblock %}
+			</section>
+			</div>
+		</div>
+	</body>
+</html>

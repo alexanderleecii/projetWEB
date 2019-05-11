@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'album/css/album.css' %}">
+{% block pagecontent %}
+<div class="container p-0">
+	<div class="row w-100 m-0">
+		<div class="row w-100 m-0">
+			<h1 class="text-center w-100 m-auto">{{ Album.title }}</h1>
+		</div>
+		<div class="row w-100 m-0">
+				<p class="w-100 m-auto text-center">Date de sortie: {{ Album.out_date }}</p>
+		</div>
+	</div>
+
+	<div class="row w-100 m-0">
+		<table>
+			<tr>
+				<th>Titre</th>
+				<th>Durée</th>
+			</tr>
+			{% for song in Songs %}
+			<tr>
+				<th>{{ song.title }}</th>
+				<th>{{ song.duration }}</th>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+	<div class="row w-100 m-0">
+
+	</div>
+</div>
+{% endblock %}
