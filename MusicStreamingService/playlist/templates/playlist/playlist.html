@@ -26,13 +26,13 @@
 				<th>Date d'ajout</th>
 				<th>Durée</th>
 			</tr>
-			{% for song,date in Songs %}
+			{% for song in Songs %}
 			<tr>
-				<th>{{ song.title }}</th>
-				<th></th>
-				<th></th>
-				<th>{{ date|date:"d/m/y" }}</th>
-				<th>{{ song.duration }}</th>
+				<th>{{ song.song_title }}</th>
+				<th>{{ song.artist_name }}</th>
+				<th>{{ song.album_title }}</th>
+				<th>{{ song.add_date|date:"d/m/y" }}</th>
+				<th>{{ song.song_duration }}</th>
 			</tr>
 			{% endfor %}
 		</table>

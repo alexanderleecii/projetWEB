@@ -2,13 +2,23 @@ from django.shortcuts import render
 from playlist.models import Playlist, Song_is_in
 from album.models import Album,Song
 
-# Create your views here.
+
 def display_playlist(request, id_playlist):
 
-	return render(request, 'playlist/playlist.html', {'Playlist' : Playlist.objects.get(id_playlist = id_playlist),
-													  'Songs' : zip(Song.objects.filter(id_song__in = 
-													  	Song_is_in.objects.filter(id_playlist = id_playlist).values_list('id_song')),
-													  	Song_is_in.objects.filter(id_playlist = id_playlist).values_list('add_date', flat=True))
+	playlist = Playlist.objects.get(id_playlist = id_playlist)
+	
+	songs_query = Song_is_in.objects.select_related('id_song').filter(id_playlist = id_playlist)
+	songs = []
+	for song in songs_query:
+		songs.append({
+			'song_title' : song.id_song.title,
+			'song_duration' : song.id_song.duration,
+			'add_date' : song.add_date,
+			'artist_name' : song.id_song.album_key.artist_key.name,
+			'album_title' : song.id_song.album_key.title
+		})
+
+	return render(request, 'playlist/playlist.html', {'Playlist' : playlist,
+													  'Songs' : songs,
 													 })
 
-	
