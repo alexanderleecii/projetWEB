@@ -7,8 +7,7 @@ class Album(models.Model):
 	out_date = models.DateField(auto_now_add = True)
 	album_img = models.ImageField(upload_to = "img/album_cover/")
 
-	saved_by = models.ManyToManyField("user.User")
-	artist_key = models.ForeignKey("artist.Artist", on_delete = models.CASCADE)
+	artist_key = models.ForeignKey("artist.Artist", on_delete = models.CASCADE, default = 1)
 	
 	class Meta:
 		verbose_name = "album"
@@ -24,7 +23,8 @@ class Song(models.Model):
 	out_date = models.DateField(auto_now_add = True)
 	file = models.FileField(upload_to = "songs/")
 
-	album_key = models.ForeignKey("Album", on_delete = models.PROTECT)
+	album_key = models.ForeignKey("album.Album", on_delete = models.PROTECT, default = 1)
+	features = models.ManyToManyField("artist.Artist", related_name = "appears_in")
 
 	class Meta:
 		verbose_name = "song"

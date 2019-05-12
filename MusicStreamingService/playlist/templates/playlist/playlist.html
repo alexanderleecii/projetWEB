@@ -5,6 +5,10 @@
 <div class="container p-0">
 	<div class="row w-100 m-0">
 		<div class="row w-100 m-0">
+			<img src="{% static 'playlist/img/playlist_cover/' %}{{ Playlist.playlist_img }}" alt="{{ Playlist.name }}"
+				 class="w-25 m-auto">
+		</div>
+		<div class="row w-100 m-0">
 			<h1 class="text-center w-100 m-auto">{{ Playlist.name }}</h1>
 		</div>
 		<div class="row w-100 m-0">
@@ -18,7 +22,7 @@
 	</div>
 
 	<div class="row w-100 m-0">
-		<table>
+		<table class="w-100 m-auto">
 			<tr>
 				<th>Titre</th>
 				<th>Artiste</th>

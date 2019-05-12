@@ -10,8 +10,10 @@ class User(models.Model):
 	password = models.CharField(max_length = 50)
 	profile_pic = models.ImageField(upload_to = "img/user_avatar/")
 
+	saved_playlist = models.ManyToManyField("playlist.Playlist", related_name = "savers")
+	saved_album = models.ManyToManyField("album.Album", related_name = "saved_by")
+	following_artist = models.ManyToManyField("artist.Artist", related_name = "followers")
 	following_user = models.ManyToManyField("self", symmetrical = False)
-	saved_playlist = models.ManyToManyField("playlist.Playlist")
 
 	class Meta:
 		verbose_name = "user"
@@ -21,8 +23,8 @@ class User(models.Model):
 		return self.pseudo
 
 class Listening_session(models.Model):
-	fk_user = models.ForeignKey("User", on_delete = models.PROTECT)
-	fk_song = models.ForeignKey("album.Song", on_delete = models.PROTECT)
+	fk_user = models.ForeignKey("user.User", on_delete = models.PROTECT, default = 1)
+	fk_song = models.ForeignKey("album.Song", on_delete = models.PROTECT, default = 1)
 	date = models.DateTimeField(auto_now_add = True)
 
 	class Meta:

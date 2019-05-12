@@ -1,4 +1,81 @@
 {% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'user/css/user.css' %}">
 {% block pagecontent %}
-<h1>Bienvenue sur le profil de {{ user.pseudo }}</h1>
+<div class="container p-0">
+	<div class="row w-100 m-0">
+		<div class="col-md-1">
+			<img src="{% static 'user/img/user_avatar/' %}{{ user.profile_pic }}">
+		</div>
+		<div class="col-md-11">
+			<div class="row w-100 m-0">
+				<h1 class="text-center w-100 m-auto">{{ user.pseudo }}</h1>
+			</div>
+			<div class="row w-100 m-0">
+				<a href="/user/{{ user.id_user }}/followers/">{{ user.followers_count }} Followers</a>
+				|
+				<a href="/user/{{ user.id_user }}/following/">{{ user.following_count }} Following</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="row w-100 m-0">
+		<div class="row w-100 m-0">
+			<a href="/user/{{ user.id_user }}/created_playlists/"><h3>Playlists créées ></h3></a>
+		</div>
+		<div class="row w-100 m-0">
+			{% for playlist in created_playlists %}
+			<div class="col-md-3">
+				<div class="row">
+					<img src="{% static 'playlist/img/playlist_cover/' %}{{ playlist.playlist_img }}">
+				</div>
+				<div class="row">
+					{{ playlist.name }}
+				</div>
+			</div>
+			{% endfor %}
+			<div class="col-md-3">
+				<div class="row">
+					<a href="#"><img src="{% static 'user/img/display_playlist/' %}add_to_playlist.png"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row w-100 m-0">
+		<div class="row w-100 m-0">
+			<a href="/user/{{ user.id_user }}/saved_playlists/"><h3>Playlists sauvegardées ></h3></a>
+		</div>
+		<div class="row w-100 m-0">
+			{% for playlist in saved_playlists %}
+			<div class="col-md-3">
+				<div class="row">
+					<img src="{% static 'playlist/img/playlist_cover/' %}{{ playlist.playlist_img }}">
+				</div>
+				<div class="row">
+					{{ playlist.name }}
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+
+	<div class="row w-100 m-0">
+		<div class="row w-100 m-0">
+			<a href="/user/{{ user.id_user }}/saved_albums/"><h3>Albums sauvegardés ></h3></a>
+		</div>
+		<div class="row w-100 m-0">
+			{% for album in albums %}
+			<div class="col-md-3">
+				<div class="row">
+					<img src="{% static 'album/img/album_cover/' %}{{ album.album_img }}">
+				</div>
+				<div class="row">
+					{{ album.title }}
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
 {% endblock %}

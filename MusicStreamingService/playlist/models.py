@@ -9,7 +9,8 @@ class Playlist(models.Model):
 	update_date = models.DateField(auto_now = True)
 	playlist_img = models.ImageField(upload_to = "img/playlist_cover/")
 
-	creator = models.ForeignKey("user.User", on_delete = models.CASCADE)
+	contains = models.ManyToManyField("album.Song", related_name = "in_playlists")
+	creator = models.ForeignKey("user.User", on_delete = models.CASCADE, default = 1)
 
 	class Meta:
 		verbose_name = "playlist"
@@ -19,8 +20,8 @@ class Playlist(models.Model):
 		return self.name
 
 class Song_is_in(models.Model):
-	id_playlist = models.ForeignKey("Playlist", on_delete = models.CASCADE)
-	id_song = models.ForeignKey("album.Song", on_delete = models.CASCADE)
+	id_playlist = models.ForeignKey("playlist.Playlist", on_delete = models.CASCADE, default = 1)
+	id_song = models.ForeignKey("album.Song", on_delete = models.CASCADE, default = 1)
 	add_date = models.DateField(auto_now_add = True)
 
 	class Meta:
