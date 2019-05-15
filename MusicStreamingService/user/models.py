@@ -1,19 +1,26 @@
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
+from .managers import CustomUserManager
 
 # Create your models here.
-class User(models.Model):
+class User(AbstractBaseUser, PermissionsMixin):
 	id_user = models.AutoField(primary_key = True)
 	surname = models.CharField(max_length = 50)
 	name = models.CharField(max_length = 50)
 	pseudo = models.CharField(max_length = 50)
-	mail = models.EmailField(max_length = 254)
-	password = models.CharField(max_length = 50)
+	email = models.EmailField(max_length = 254, unique = True)
 	profile_pic = models.ImageField(upload_to = "img/user_avatar/")
+	is_staff = models.BooleanField(default = False)
 
 	saved_playlist = models.ManyToManyField("playlist.Playlist", related_name = "savers")
 	saved_album = models.ManyToManyField("album.Album", related_name = "saved_by")
 	following_artist = models.ManyToManyField("artist.Artist", related_name = "followers")
 	following_user = models.ManyToManyField("self", symmetrical = False)
+
+	USERNAME_FIELD = "email"
+	REQUIRED_FIELDS = ["surname", "name", "pseudo"]
+
+	objects = CustomUserManager()
 
 	class Meta:
 		verbose_name = "user"
