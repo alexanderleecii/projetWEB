@@ -1,0 +1,22 @@
+#results{
+	height: 50%;
+	width:30%;
+	overflow:scroll;
+	z-index: 1;
+	position: absolute;
+	will-change: transform;
+	top: 0px;
+	left: 0px;
+	transform: translate3d(0px, 40px, 0px);
+}
+#search_module{
+	height:6%;
+}
+#result{
+	font-size:0.8em;
+}
+
+.searchcategory{
+	font-size:1.5em;
+	font-weight:bold;
+}

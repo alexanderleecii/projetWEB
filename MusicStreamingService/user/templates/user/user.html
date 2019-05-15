@@ -12,9 +12,9 @@
 				<h1 class="text-center w-100 m-auto">{{ user.pseudo }}</h1>
 			</div>
 			<div class="row w-100 m-0">
-				<a href="/user/{{ user.id_user }}/followers/">{{ user.followers_count }} Followers</a>
+				<a href="/user/{{ user.id_user }}/followers/">{{ followers_count }} Followers</a>
 				|
-				<a href="/user/{{ user.id_user }}/following/">{{ user.following_count }} Following</a>
+				<a href="/user/{{ user.id_user }}/following/">{{ following_count }} Following</a>
 			</div>
 		</div>
 	</div>
@@ -26,12 +26,14 @@
 		<div class="row w-100 m-0">
 			{% for playlist in created_playlists %}
 			<div class="col-md-3">
-				<div class="row">
-					<img src="{% static 'playlist/img/playlist_cover/' %}{{ playlist.playlist_img }}">
-				</div>
-				<div class="row">
-					{{ playlist.name }}
-				</div>
+				<a href="/playlist/{{ playlist.id_playlist }}/">
+					<div class="row">
+						<img src="{% static 'playlist/img/playlist_cover/' %}{{ playlist.playlist_img }}">
+					</div>
+					<div class="row">
+						{{ playlist.name }}
+					</div>
+				</a>
 			</div>
 			{% endfor %}
 			<div class="col-md-3">
@@ -49,12 +51,14 @@
 		<div class="row w-100 m-0">
 			{% for playlist in saved_playlists %}
 			<div class="col-md-3">
-				<div class="row">
-					<img src="{% static 'playlist/img/playlist_cover/' %}{{ playlist.playlist_img }}">
-				</div>
-				<div class="row">
-					{{ playlist.name }}
-				</div>
+				<a href="/playlist/{{ playlist.id_playlist }}/">
+					<div class="row">
+						<img src="{% static 'playlist/img/playlist_cover/' %}{{ playlist.playlist_img }}">
+					</div>
+					<div class="row">
+						{{ playlist.name }}
+					</div>
+				</a>
 			</div>
 			{% endfor %}
 		</div>
@@ -67,12 +71,14 @@
 		<div class="row w-100 m-0">
 			{% for album in albums %}
 			<div class="col-md-3">
-				<div class="row">
-					<img src="{% static 'album/img/album_cover/' %}{{ album.album_img }}">
-				</div>
-				<div class="row">
-					{{ album.title }}
-				</div>
+				<a href="/album/{{ album.id_album }}/">	
+					<div class="row">
+						<img src="{% static 'album/img/album_cover/' %}{{ album.album_img }}">
+					</div>
+					<div class="row">
+						{{ album.title }}
+					</div>
+				</a>
 			</div>
 			{% endfor %}
 		</div>

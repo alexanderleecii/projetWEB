@@ -1,6 +1,137 @@
 {% extends "base.html" %}
+{% load static %}
+{% block headincludes %}
+<link rel="stylesheet" type="text/css" href="{% static 'browse/css/browse.css' %}">
+<script type="text/javascript" src="https://unpkg.com/popper.js@1.15.0/dist/umd/popper.js"></script>
+{% endblock %}
 {% block pagecontent %}
-	<h1>Bienvenue sur la page d'accueil</h1>
-	<p>Ici on aura des playlists, albums et artistes proposés au user connecté</p>
-	<p>Développement en cours...</p>
+<div id="#content" class="container p-0">
+	<div id="search_module">
+		{% csrf_token %}
+		<div id="searchbar">
+			<input type="text" name="search" id="search" placeholder="Recherche" class="form-control">
+		</div>
+		<div id="results">
+			<ul class="list-group" id="result">
+				
+			</ul>
+		</div>
+	</div>
+	<div id="pagecontent" class="container">
+		<div class="row w-100 m-0">
+			<div class="row w-100 m-0">
+				<a href="/browse/latest_playlists/"><h3>Dernières playlists ></h3></a>
+			</div>
+			<div class="row w-100 m-0">
+				{% for playlist in result.playlists %}
+				<div class="col-md-3">
+					<a href="/playlist/{{ playlist.id_playlist }}/">
+						<div class="row">
+							<img src="{% static 'playlist/img/playlist_cover/' %}{{ playlist.playlist_img }}">
+						</div>
+						<div class="row">
+							{{ playlist.name }}
+						</div>
+					</a>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="row w-100 m-0">
+			<div class="row w-100 m-0">
+				<a href="/browse/latest_albums/"><h3>Derniers albums ></h3></a>
+			</div>
+			<div class="row w-100 m-0">
+				{% for album in result.albums %}
+				<div class="col-md-3">
+					<a href="/album/{{ album.id_album }}/">	
+						<div class="row">
+							<img src="{% static 'album/img/album_cover/' %}{{ album.album_img }}">
+						</div>
+						<div class="row">
+							{{ album.title }}
+						</div>
+					</a>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+$(document).ready(function(){
+	var reference = document.querySelector('#searchbar');
+	var popper = document.querySelector('#results');
+	var popperInstance = new Popper(reference, popper, {
+		placement : 'bottom',
+		modifiers : {
+			offset : {
+				enabled : true,
+				offset : '0,0'
+			},
+			applyStyle : { enabled : false }
+		}
+	});
+	$('#search').keyup(function(){
+		$('#result').html('');
+		$('#state').val('');
+		var searchField = $('#search').val();
+		var expression = new RegExp(searchField, "i");
+		var songs = {{ songsjson|safe }};
+		var albums = {{ albumsjson|safe }};
+		var artists = {{ artistsjson|safe }};
+		var playlists = {{ playlistsjson|safe }};
+		var users = {{ usersjson|safe }};
+		$('#result').append('<li class="list-group-item searchcategory">Morceaux</li>')
+		$.each(songs, function(key, value)
+		{
+			if (value.fields.title.search(expression) != -1)
+			{
+				$('#result').append('<li class="list-group-item">'+value.fields.title+'</li>');
+			}
+		});
+		$('#result').append('<li class="list-group-item searchcategory">Playlists</li>')
+		$.each(playlists, function(key, value)
+		{
+			if (value.fields.name.search(expression) != -1)
+			{
+				$('#result').append('<li class="list-group-item">'+value.fields.name+'</li>');
+			}
+		});
+		$('#result').append('<li class="list-group-item searchcategory">Albums</li>')
+		$.each(albums, function(key, value)
+		{
+			if (value.fields.title.search(expression) != -1)
+			{
+				$('#result').append('<li class="list-group-item">'+value.fields.title+'</li>');
+			}
+		});
+		$('#result').append('<li class="list-group-item searchcategory">Artists</li>')
+		$.each(artists, function(key, value)
+		{
+			if (value.fields.name.search(expression) != -1)
+			{
+				$('#result').append('<li class="list-group-item">'+value.fields.name+'</li>');
+			}
+		});
+		$('#result').append('<li class="list-group-item searchcategory">Users</li>')
+		$.each(users, function(key, value)
+		{
+			if (value.fields.pseudo.search(expression) != -1)
+			{
+				$('#result').append('<li class="list-group-item">'+value.fields.pseudo+'</li>');
+			}
+		});
+ 	});
+	$('#result').on('click', 'li', function() {
+		var click_text = $(this).text().split('|');
+		$('#search').val($.trim(click_text[0]));
+		$("#result").html('');
+	});
+	$('#pagecontent').click(function(){
+	    $('#result').html('');
+	});
+});
+</script>
 {% endblock %}

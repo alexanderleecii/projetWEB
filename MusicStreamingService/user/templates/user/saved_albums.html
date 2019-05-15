@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'user/css/user.css' %}">
+{% block pagecontent %}
+<div class="container p-0">
+	<div class="row w-100 m-0">
+		<h1 class="text-center w-100 m-auto">Albums sauvegardés par {{ user.pseudo }}</h1>
+	</div>
+	{% for album in albums %}
+	<div class="row w-100 m-0">
+		<a href="/album/{{ album.id_album }}/" class="w-100">
+			<div class="col-md-1">
+				<img src="{% static 'album/img/album_cover/' %}{{ album.album_img }}" class="w-100 h-100">
+			</div>
+			<div class="col-md-11">
+				{{ album.title }}
+			</div>
+		</a>
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}
