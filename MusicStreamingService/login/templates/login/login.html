@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>FRZN. inscription</title>
+    <title>FRZN. connexion</title>
 </head>
 <body>
-    <h2>Inscription</h2>
+    <h2>Connexion</h2>
     <form method="post">
     {% csrf_token %}
     {% for field in form %}
@@ -20,7 +20,7 @@
       </p>
     {% endfor %}
     <!--{{ form.as_p }}-->
-    <button type="submit">S'inscrire</button>
+    <button type="submit">Se connecter</button>
     </form>
 </body>
 </html>

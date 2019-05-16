@@ -23,13 +23,13 @@
 				</div>
 				<div class="row text-center w-100">
 					<div id="display_user" class="text-center">
-						User
+						{{ request.COOKIES.pseudo }}
 						<img src="user/media/img/user_avatar/frozone.jpg">
 					</div>
 				</div>
 				<div class="row w-100">
 					<nav id="nav_frzn" class="nav flex-column text-center">
-						<a href="/user/1/" class="nav-link text-light w-100 d-block">Mon profil</a></li>
+						<a href="/user/{{ request.COOKIES.id }}/" class="nav-link text-light w-100 d-block">Mon profil</a></li>
 						<a href="/browse/" class="nav-link text-light w-100 d-block">Accueil</a></li>
 					</nav>
 				</div>
@@ -42,7 +42,7 @@
 			</div>
 
 			<div class="mainsection col-md-9">
-			<section>
+			<section class="h-100">
 				{% block pagecontent %}{% endblock %}
 			</section>
 			</div>

@@ -5,7 +5,7 @@
 <script type="text/javascript" src="https://unpkg.com/popper.js@1.15.0/dist/umd/popper.js"></script>
 {% endblock %}
 {% block pagecontent %}
-<div id="#content" class="container p-0">
+<div id="content" class="container p-0 h-100">
 	<div id="search_module">
 		{% csrf_token %}
 		<div id="searchbar">
@@ -17,7 +17,7 @@
 			</ul>
 		</div>
 	</div>
-	<div id="pagecontent" class="container">
+	<div id="pagecontent" class="container h-100">
 		<div class="row w-100 m-0">
 			<div class="row w-100 m-0">
 				<a href="/browse/latest_playlists/"><h3>Dernières playlists ></h3></a>
@@ -73,7 +73,9 @@ $(document).ready(function(){
 			applyStyle : { enabled : false }
 		}
 	});
+	$('#results').hide();
 	$('#search').keyup(function(){
+		$('#results').show();
 		$('#result').html('');
 		$('#state').val('');
 		var searchField = $('#search').val();
@@ -85,7 +87,7 @@ $(document).ready(function(){
 		var users = {{ usersjson|safe }};
 		$('#result').append('<li class="list-group-item searchcategory">Morceaux</li>')
 		$.each(songs, function(key, value)
-		{
+		{;;
 			if (value.fields.title.search(expression) != -1)
 			{
 				$('#result').append('<li class="list-group-item">'+value.fields.title+'</li>');
@@ -131,6 +133,7 @@ $(document).ready(function(){
 	});
 	$('#pagecontent').click(function(){
 	    $('#result').html('');
+	    $('#results').hide();
 	});
 });
 </script>

@@ -2,7 +2,6 @@ from django.shortcuts import render
 from playlist.models import Playlist, Song_is_in
 from album.models import Album,Song
 
-
 def display_playlist(request, id_playlist):
 
 	playlist = Playlist.objects.get(id_playlist = id_playlist)

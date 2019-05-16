@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'artist',
     'user',
     'register',
+    'login',
 ]
 
 MIDDLEWARE = [
@@ -137,6 +138,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
-#Media Folder root
+# Media Folder root
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+# Cookies
+
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
