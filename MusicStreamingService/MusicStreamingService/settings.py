@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'user',
     'register',
     'login',
+    'logout',
 ]
 
 MIDDLEWARE = [
@@ -141,6 +142,8 @@ STATICFILES_DIRS = (
 # Media Folder root
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+MEDIA_URL = os.path.join(BASE_DIR, 'media/')
 
 # Cookies
 

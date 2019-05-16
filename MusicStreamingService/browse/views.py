@@ -1,6 +1,6 @@
 from django.template.context_processors import csrf
 from django.core import serializers
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from playlist.models import Playlist
 from album.models import Album,Song
 from artist.models import Artist
@@ -36,10 +36,14 @@ def home(request):
 		return redirect("login")
 
 def display_latest_playlists(request):
-
-	return render(request, 'browse/latest_playlists.html')
+	if request.user.is_authenticated:
+		return render(request, 'browse/latest_playlists.html')
+	else:
+		return redirect("login")
 
 def display_latest_albums(request):
-
-	return render(request, 'browse/latest_albums.html')
+	if request.user.is_authenticated:
+		return render(request, 'browse/latest_albums.html')
+	else:
+		return redirect("login")
 		

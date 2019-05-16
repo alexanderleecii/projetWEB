@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import User
 from playlist.models import Playlist
 from album.models import Album
+from playlist.forms import PlaylistCreationForm
 
 def display_user(request, id_user):
 	if request.user.is_authenticated:
@@ -17,12 +18,28 @@ def display_user(request, id_user):
 				followers_count+=1
 			
 		albums = user.saved_album.all().order_by('-out_date')[:3]
+
+		if request.method == "POST":
+			form = PlaylistCreationForm(request.POST, request.FILES)
+			if form.is_valid():
+				name = form.cleaned_data.get("playlist_name")
+				description = form.cleaned_data.get("description")
+				playlist_img = form.cleaned_data.get("playlist_img")
+
+				user = User.objects.get(id_user = request.user.id_user)
+				new_playlist = Playlist(name = name, description = description, playlist_img = playlist_img, creator = user)
+				new_playlist.save()
+				return redirect("/playlist/" + str(new_playlist.id_playlist) + "/")
+		else:
+			form = PlaylistCreationForm()
+
 		return render(request, 'user/user.html', {'user' : user,
 												  'following_count' : following_count,
 												  'followers_count' : followers_count,
 												  'created_playlists' : created_playlists,
 												  'saved_playlists' : saved_playlists,
 												  'albums' : albums,
+												  'form' : form,
 												 })
 	else:
 		return redirect("login")

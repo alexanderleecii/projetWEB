@@ -4,10 +4,10 @@ from django.db import models
 class Playlist(models.Model):
 	id_playlist = models.AutoField(primary_key = True)
 	name = models.CharField(max_length = 100)
-	description = models.CharField(max_length = 254)
+	description = models.CharField(max_length = 200)
 	creation_date = models.DateField(auto_now_add = True)
 	update_date = models.DateField(auto_now = True)
-	playlist_img = models.ImageField(upload_to = "img/playlist_cover/")
+	playlist_img = models.ImageField(upload_to = "img/playlist_cover/", null = True, blank = True)
 
 	contains = models.ManyToManyField("album.Song", related_name = "in_playlists")
 	creator = models.ForeignKey("user.User", on_delete = models.CASCADE, default = 1)

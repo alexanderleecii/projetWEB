@@ -28,7 +28,11 @@
 			<div class="col-md-3">
 				<a href="/playlist/{{ playlist.id_playlist }}/">
 					<div class="row">
-						<img src="{% static 'playlist/img/playlist_cover/' %}{{ playlist.playlist_img }}">
+						{% if playlist.playlist_img %}
+						<img src="{{ playlist.playlist_img.url }}">
+						{% else %}
+						<img src="/home/alcii/Documents/projetWEB/MusicStreamingService/media/img/playlist_cover/no_image.png">
+						{% endif %}
 					</div>
 					<div class="row">
 						{{ playlist.name }}
@@ -38,7 +42,30 @@
 			{% endfor %}
 			<div class="col-md-3">
 				<div class="row">
-					<a href="#"><img src="{% static 'user/img/display_playlist/' %}add_to_playlist.png"></a>
+					<button type="button" data-toggle="modal" data-target="#playlistModal">
+						<img src="{% static 'user/img/display_playlist/' %}add_to_playlist.png" class="w-50 h-90">
+					</button>
+					<div class="modal fade" id="playlistModal" tabindex="-1" role="dialog" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<form method="post" enctype="multipart/form-data">{% csrf_token %}
+									<div class="modal-header">
+										<h5 class="modal-title">Créer une playlist</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										{{ form }}
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+										<button type="submit" class="btn btn-primary">Créer</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
