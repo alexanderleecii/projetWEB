@@ -87,7 +87,7 @@ $(document).ready(function(){
 		var users = {{ usersjson|safe }};
 		$('#result').append('<li class="list-group-item searchcategory">Morceaux</li>')
 		$.each(songs, function(key, value)
-		{;;
+		{
 			if (value.fields.title.search(expression) != -1)
 			{
 				$('#result').append('<li class="list-group-item">'+value.fields.title+'</li>');
@@ -98,7 +98,7 @@ $(document).ready(function(){
 		{
 			if (value.fields.name.search(expression) != -1)
 			{
-				$('#result').append('<li class="list-group-item">'+value.fields.name+'</li>');
+				$('#result').append('<li class="list-group-item"><a href="/playlist/'+value.pk+'">'+value.fields.name+'</a></li>');
 			}
 		});
 		$('#result').append('<li class="list-group-item searchcategory">Albums</li>')
@@ -106,7 +106,7 @@ $(document).ready(function(){
 		{
 			if (value.fields.title.search(expression) != -1)
 			{
-				$('#result').append('<li class="list-group-item">'+value.fields.title+'</li>');
+				$('#result').append('<li class="list-group-item"><a href="/album/'+value.pk+'">'+value.fields.title+'</a></li>');
 			}
 		});
 		$('#result').append('<li class="list-group-item searchcategory">Artists</li>')
@@ -114,7 +114,7 @@ $(document).ready(function(){
 		{
 			if (value.fields.name.search(expression) != -1)
 			{
-				$('#result').append('<li class="list-group-item">'+value.fields.name+'</li>');
+				$('#result').append('<li class="list-group-item"><a href="/artist/'+value.pk+'">'+value.fields.name+'</a></li>');
 			}
 		});
 		$('#result').append('<li class="list-group-item searchcategory">Users</li>')
@@ -122,15 +122,10 @@ $(document).ready(function(){
 		{
 			if (value.fields.pseudo.search(expression) != -1)
 			{
-				$('#result').append('<li class="list-group-item">'+value.fields.pseudo+'</li>');
+				$('#result').append('<li class="list-group-item"><a href="/user/'+value.pk+'">'+value.fields.pseudo+'</a></li>');
 			}
 		});
  	});
-	$('#result').on('click', 'li', function() {
-		var click_text = $(this).text().split('|');
-		$('#search').val($.trim(click_text[0]));
-		$("#result").html('');
-	});
 	$('#pagecontent').click(function(){
 	    $('#result').html('');
 	    $('#results').hide();

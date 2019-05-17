@@ -53,6 +53,7 @@
 			{% endfor %}
 			<div class="col-md-3">
 				<div class="row">
+					{% if user.id_user|stringformat:"i" == request.COOKIES.id %}
 					<button type="button" data-toggle="modal" data-target="#playlistModal">
 						<img src="{% static 'user/img/display_playlist/' %}add_to_playlist.png" class="w-50 h-90">
 					</button>
@@ -77,6 +78,7 @@
 							</div>
 						</div>
 					</div>
+					{% endif %}
 				</div>
 			</div>
 		</div>
