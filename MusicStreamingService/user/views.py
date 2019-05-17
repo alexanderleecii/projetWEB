@@ -120,6 +120,32 @@ def save_playlist_ajax(request):
 		user.save()
 	return HttpResponse(request)
 
+def unsave_playlist_ajax(request):
+	if request.is_ajax() and request.method == "POST" :
+		user = request.user
+		id_playlist = request.POST.get("id_playlist")
+		playlist = Playlist.objects.get(id_playlist = id_playlist)
+		user.saved_playlist.remove(playlist)
+		user.save()
+	return HttpResponse(request)
+
+def save_album_ajax(request):
+	if request.is_ajax() and request.method == "POST" :
+		user = request.user
+		id_album = request.POST.get("id_album")
+		user.saved_album.add(id_album)
+		user.save()
+	return HttpResponse(request)
+
+def unsave_album_ajax(request):
+	if request.is_ajax() and request.method == "POST" :
+		user = request.user
+		id_album = request.POST.get("id_album")
+		album = Album.objects.get(id_album = id_album)
+		user.saved_album.remove(album)
+		user.save()
+	return HttpResponse(request)
+
 def follow_user_ajax(request):
 	if request.is_ajax() and request.method == "POST" :
 		user = request.user

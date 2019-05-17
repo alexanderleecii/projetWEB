@@ -10,6 +10,13 @@
 		<div class="row w-100 m-0">
 				<p class="w-100 m-auto text-center">Date de sortie: {{ Album.out_date }}</p>
 		</div>
+		<div class="row w-100 m-0">
+		{% if not has_saved %}
+			<button id="save_album" type="button" name="{{ Album.id_album }}" class="btn btn-primary">Sauvegarder</button>{% csrf_token %}
+		{% else %}
+			<button id="unsave_album" type="button" name="{{ Album.id_album }}" class="btn btn-secondary">Retirer de sa bibliothèque</button>{% csrf_token %}
+		{% endif %}
+		</div>
 	</div>
 
 	<div class="row w-100 m-0">

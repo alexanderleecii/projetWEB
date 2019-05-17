@@ -6,6 +6,7 @@ from user.models import User
 def display_playlist(request, id_playlist):
 	if request.user.is_authenticated:
 		playlist = Playlist.objects.get(id_playlist = id_playlist)
+		has_saved = (request.user.saved_playlist.filter(id_playlist = id_playlist).count() == 1)
 		
 		songs_query = Song_is_in.objects.select_related('id_song').filter(id_playlist = id_playlist)
 		songs = []
@@ -20,6 +21,7 @@ def display_playlist(request, id_playlist):
 
 		return render(request, 'playlist/playlist.html', {'Playlist' : playlist,
 														  'Songs' : songs,
+														  'has_saved' : has_saved,
 														 })
 	else:
 		return redirect("login")

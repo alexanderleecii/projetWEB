@@ -56,40 +56,92 @@
 		</div>
 	</body>
 	<script>
-		$('#save_playlist').click(function(){
+		$(document).on("click", "#save_playlist", function(){
+		    $(this).attr("id", "unsave_playlist");
+		    $(this).attr("class", "btn btn-secondary");
+		    $(this).html("Retirer de sa bibliothèque");
 		    $.ajax({
 		    	type: "POST",
 	            url: "{% url 'save_playlist_ajax' %}",
 	            data: {"id_playlist": $(this).attr("name"),
 	            	   "csrfmiddlewaretoken": "{{ csrf_token }}"
 	        	},
-	            dataType: "json",
-	            success: function(){}
+	            success: function(){
+	            }
 		    })
 		});
 	</script>
 	<script>
-		$(function(){
-			$('#follow').click(function(){
-			    $.ajax({
-			    	type: "POST",
-		            url: "{% url 'follow_user_ajax' %}",
-		            data: {"id_user": $(this).attr("name"),
-		            	   "csrfmiddlewaretoken": "{{ csrf_token }}"
-		        	},
-		            success: function(){
-		            	var nb_followers = $("#nb_followers").html();
-					    $("#nb_followers").html(parseInt(nb_followers) + 1);
-		            }
-			    })
-			    $(this).attr("disabled", true);
-					    
-			});
+		$(document).on("click", "#unsave_playlist", function(){
+		    $(this).attr("id", "save_playlist");
+		    $(this).attr("class", "btn btn-primary");
+		    $(this).html("Sauvegarder");
+		    $.ajax({
+		    	type: "POST",
+	            url: "{% url 'unsave_playlist_ajax' %}",
+	            data: {"id_playlist": $(this).attr("name"),
+	            	   "csrfmiddlewaretoken": "{{ csrf_token }}"
+	        	},
+	            success: function(){
+	            }
+		    })
 		});
 	</script>
 	<script>
-		$(function(){
-			$('#unfollow').click(function(){
+		$(document).on("click", "#save_album", function(){
+		    $(this).attr("id", "unsave_album");
+		    $(this).attr("class", "btn btn-secondary");
+		    $(this).html("Retirer de sa bibliothèque");
+		    $.ajax({
+		    	type: "POST",
+	            url: "{% url 'save_album_ajax' %}",
+	            data: {"id_album": $(this).attr("name"),
+	            	   "csrfmiddlewaretoken": "{{ csrf_token }}"
+	        	},
+	            success: function(){
+	            }
+		    })
+		});
+	</script>
+	<script>
+		$(document).on("click", "#unsave_album", function(){
+		    $(this).attr("id", "save_album");
+		    $(this).attr("class", "btn btn-primary");
+		    $(this).html("Sauvegarder");
+		    $.ajax({
+		    	type: "POST",
+	            url: "{% url 'unsave_album_ajax' %}",
+	            data: {"id_album": $(this).attr("name"),
+	            	   "csrfmiddlewaretoken": "{{ csrf_token }}"
+	        	},
+	            success: function(){
+	            }
+		    })
+		});
+	</script>
+	<script>
+		$(document).on("click", "#follow", function(){
+		    $(this).attr("id", "unfollow");
+		    $(this).attr("class", "btn btn-secondary");
+		    $(this).html("Ne plus suivre");
+		    $.ajax({
+		    	type: "POST",
+	            url: "{% url 'follow_user_ajax' %}",
+	            data: {"id_user": $(this).attr("name"),
+	            	   "csrfmiddlewaretoken": "{{ csrf_token }}"
+	        	},
+	            success: function(){
+	            	var nb_followers = $("#nb_followers").html();
+				    $("#nb_followers").html(parseInt(nb_followers) + 1);
+	            }
+		    })    
+		});
+	</script>
+	<script>
+		$(document).on("click", "#unfollow", function(){
+			    $(this).attr("id", "follow");
+			    $(this).attr("class", "btn btn-primary");
+			    $(this).html("Suivre");
 			    $.ajax({
 			    	type: "POST",
 		            url: "{% url 'unfollow_user_ajax' %}",
@@ -101,8 +153,6 @@
 					    $("#nb_followers").html(parseInt(nb_followers) - 1);
 		            }
 			    })
-			    $(this).attr("disabled", true);  
 			});
-		});
 	</script>
 </html>

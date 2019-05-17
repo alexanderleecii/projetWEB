@@ -19,10 +19,15 @@
 				Dernière mise-à-jour : {{ Playlist.update_date }}
 			</div>
 		</div>
-
+		{% if Playlist.creator_id|stringformat:"i" != request.COOKIES.id %}
 		<div class="row w-100 m-0">
-			<button id="save_playlist" type="button" name="{{ Playlist.id_playlist }}" class="btn btn-primary">Sauvegarder</button>{% csrf_token %}
+			{% if not has_saved %}
+				<button id="save_playlist" type="button" name="{{ Playlist.id_playlist }}" class="btn btn-primary">Sauvegarder</button>{% csrf_token %}
+			{% else %}
+				<button id="unsave_playlist" type="button" name="{{ Playlist.id_playlist }}" class="btn btn-secondary">Retirer de sa bibliothèque</button>{% csrf_token %}
+			{% endif %}
 		</div>
+		{% endif %}
 	</div>
 
 	<div class="row w-100 m-0">
