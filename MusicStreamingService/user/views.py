@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse, HttpResponse
 from .models import User
 from playlist.models import Playlist
 from album.models import Album
@@ -16,7 +17,9 @@ def display_user(request, id_user):
 		for u in other_users:
 			if u.following_user.filter(id_user = id_user).count() == 1 :
 				followers_count+=1
-			
+		
+		follows = (request.user.following_user.filter(id_user = id_user).count() == 1)
+
 		albums = user.saved_album.all().order_by('-out_date')[:3]
 
 		if request.method == "POST":
@@ -36,6 +39,7 @@ def display_user(request, id_user):
 		return render(request, 'user/user.html', {'user' : user,
 												  'following_count' : following_count,
 												  'followers_count' : followers_count,
+												  'follows' : follows,
 												  'created_playlists' : created_playlists,
 												  'saved_playlists' : saved_playlists,
 												  'albums' : albums,
@@ -107,3 +111,28 @@ def display_followers(request, id_user):
 													  })
 	else:
 		return redirect("login")
+
+def save_playlist_ajax(request):
+	if request.is_ajax() and request.method == "POST" :
+		user = request.user
+		id_playlist = request.POST.get("id_playlist")
+		user.saved_playlist.add(id_playlist)
+		user.save()
+	return HttpResponse(request)
+
+def follow_user_ajax(request):
+	if request.is_ajax() and request.method == "POST" :
+		user = request.user
+		id_user_follow = request.POST.get("id_user")
+		user.following_user.add(id_user_follow)
+		user.save()
+	return HttpResponse(request)
+
+def unfollow_user_ajax(request):
+	if request.is_ajax() and request.method == "POST" :
+		user = request.user
+		id_user_unfollow = request.POST.get("id_user_unfollow")
+		user_to_unfollow = User.objects.get(id_user = id_user_unfollow)
+		user.following_user.remove(user_to_unfollow)
+		user.save()
+	return HttpResponse(request)

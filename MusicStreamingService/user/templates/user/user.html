@@ -12,10 +12,21 @@
 				<h1 class="text-center w-100 m-auto">{{ user.pseudo }}</h1>
 			</div>
 			<div class="row w-100 m-0">
-				<a href="/user/{{ user.id_user }}/followers/">{{ followers_count }} Followers</a>
+				<a href="/user/{{ user.id_user }}/followers/"><div id="nb_followers">{{ followers_count }}</div> Followers</a>
 				|
-				<a href="/user/{{ user.id_user }}/following/">{{ following_count }} Following</a>
+				<a href="/user/{{ user.id_user }}/following/"><div id="nb_following">{{ following_count }}</div> Following</a>
 			</div>
+			{% if user.id_user|stringformat:"i" != request.COOKIES.id %}
+				{% if not follows %}
+				<div class="row w-100 m-0">
+					<button id="follow" type="button" name="{{ user.id_user }}" class="btn btn-primary">Suivre</button>{% csrf_token %}
+				</div>
+				{% else %}
+				<div class="row w-100 m-0">
+					<button id="unfollow" type="button" name="{{ user.id_user }}" class="btn btn-secondary">Ne plus suivre</button>{% csrf_token %}
+				</div>
+				{% endif %}
+			{% endif %}
 		</div>
 	</div>
 

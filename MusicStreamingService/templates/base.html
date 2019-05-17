@@ -55,4 +55,54 @@
 			</div>
 		</div>
 	</body>
+	<script>
+		$('#save_playlist').click(function(){
+		    $.ajax({
+		    	type: "POST",
+	            url: "{% url 'save_playlist_ajax' %}",
+	            data: {"id_playlist": $(this).attr("name"),
+	            	   "csrfmiddlewaretoken": "{{ csrf_token }}"
+	        	},
+	            dataType: "json",
+	            success: function(){}
+		    })
+		});
+	</script>
+	<script>
+		$(function(){
+			$('#follow').click(function(){
+			    $.ajax({
+			    	type: "POST",
+		            url: "{% url 'follow_user_ajax' %}",
+		            data: {"id_user": $(this).attr("name"),
+		            	   "csrfmiddlewaretoken": "{{ csrf_token }}"
+		        	},
+		            success: function(){
+		            	var nb_followers = $("#nb_followers").html();
+					    $("#nb_followers").html(parseInt(nb_followers) + 1);
+		            }
+			    })
+			    $(this).attr("disabled", true);
+					    
+			});
+		});
+	</script>
+	<script>
+		$(function(){
+			$('#unfollow').click(function(){
+			    $.ajax({
+			    	type: "POST",
+		            url: "{% url 'unfollow_user_ajax' %}",
+		            data: {"id_user_unfollow": $(this).attr("name"),
+		            	   "csrfmiddlewaretoken": "{{ csrf_token }}"
+		        	},
+		            success: function(){
+		            	var nb_followers = $("#nb_followers").html();
+					    $("#nb_followers").html(parseInt(nb_followers) - 1);
+		            }
+			    })
+			    $(this).attr("disabled", true);  
+			});
+		});
+	</script>
 </html>

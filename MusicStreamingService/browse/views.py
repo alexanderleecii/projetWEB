@@ -23,8 +23,8 @@ def home(request):
 
 		result = {}
 		result.update(csrf(request))
-		result['playlists'] = playlists.order_by('update_date')[:4]
-		result['albums'] = albums.order_by('out_date')[:4]
+		result['playlists'] = playlists.order_by('-update_date')[:4]
+		result['albums'] = albums.order_by('-out_date')[:4]
 		return render(request, 'browse/index.html', {'result' : result, 
 													 'songsjson' : songsjson,
 													 'playlistsjson' : playlistsjson,

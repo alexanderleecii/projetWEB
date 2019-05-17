@@ -19,6 +19,10 @@
 				Dernière mise-à-jour : {{ Playlist.update_date }}
 			</div>
 		</div>
+
+		<div class="row w-100 m-0">
+			<button id="save_playlist" type="button" name="{{ Playlist.id_playlist }}" class="btn btn-primary">Sauvegarder</button>{% csrf_token %}
+		</div>
 	</div>
 
 	<div class="row w-100 m-0">
