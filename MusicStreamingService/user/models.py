@@ -12,9 +12,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 	profile_pic = models.ImageField(upload_to = "img/user_avatar/")
 	is_staff = models.BooleanField(default = False)
 
-	saved_playlist = models.ManyToManyField("playlist.Playlist", related_name = "savers")
+	saved_playlist = models.ManyToManyField("playlist.Playlist", related_name = "saver")
 	saved_album = models.ManyToManyField("album.Album", related_name = "saved_by")
-	following_artist = models.ManyToManyField("artist.Artist", related_name = "followers")
+	following_artist = models.ManyToManyField("artist.Artist", related_name = "follower")
 	following_user = models.ManyToManyField("self", symmetrical = False)
 
 	USERNAME_FIELD = "email"

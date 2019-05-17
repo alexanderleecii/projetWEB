@@ -9,7 +9,6 @@ class Playlist(models.Model):
 	update_date = models.DateTimeField(auto_now = True)
 	playlist_img = models.ImageField(upload_to = "img/playlist_cover/", null = True, blank = True)
 
-	contains = models.ManyToManyField("album.Song", related_name = "in_playlists")
 	creator = models.ForeignKey("user.User", on_delete = models.CASCADE, default = 1)
 
 	class Meta:

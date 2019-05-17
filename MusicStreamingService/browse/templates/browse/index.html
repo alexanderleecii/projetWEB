@@ -2,7 +2,6 @@
 {% load static %}
 {% block headincludes %}
 <link rel="stylesheet" type="text/css" href="{% static 'browse/css/browse.css' %}">
-<script type="text/javascript" src="https://unpkg.com/popper.js@1.15.0/dist/umd/popper.js"></script>
 {% endblock %}
 {% block pagecontent %}
 <div id="content" class="container p-0 h-100">
@@ -13,8 +12,41 @@
 		</div>
 		<div id="results">
 			<ul class="list-group" id="result">
-				
+
 			</ul>
+		</div>
+	</div>
+	<div class="modal fade" id="songAddModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<form method="post">{% csrf_token %}
+					<div class="modal-header">
+						<div class="container">
+							<div class="row">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="row">
+								<button id="addSongInNew" type="button" name="" class="btn btn-dark">
+									Nouvelle playlist
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="modal-body">
+						{% for playlist in created_playlists %}
+							<div class="row w-100">
+								<button id="addsong" type="button" name="{{ playlist.id_playlist }}" class="btn">
+									<img src="{% static 'playlist/img/playlist_cover/' %}{{ playlist.playlist_img }}">
+									{{ playlist.name }}
+								</button>
+							</div>
+						{% endfor %}
+						<div id="already_in"></div>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 	<div id="pagecontent" class="container h-100">
@@ -58,12 +90,11 @@
 		</div>
 	</div>
 </div>
-
 <script>
 $(document).ready(function(){
-	var reference = document.querySelector('#searchbar');
-	var popper = document.querySelector('#results');
-	var popperInstance = new Popper(reference, popper, {
+	var searchBarReference = document.querySelector('#searchbar');
+	var searchBarPopper = document.querySelector('#results');
+	var searchBarPopperInstance = new Popper(searchBarReference, searchBarPopper, {
 		placement : 'bottom',
 		modifiers : {
 			offset : {
@@ -85,28 +116,63 @@ $(document).ready(function(){
 		var artists = {{ artistsjson|safe }};
 		var playlists = {{ playlistsjson|safe }};
 		var users = {{ usersjson|safe }};
+		var saved_playlists = {{ saved_playlists_json|safe }};
+		var saved_albums = {{ saved_albums_json|safe }};
 		$('#result').append('<li class="list-group-item searchcategory">Morceaux</li>')
 		$.each(songs, function(key, value)
 		{
 			if (value.fields.title.search(expression) != -1)
 			{
-				$('#result').append('<li class="list-group-item">'+value.fields.title+'<button class="add_song" type="button" name="add_song" class="btn w-25"><img src="{% static "img/add_song.png" %}" class="w-50 h-25"></button></li>');
+				$('#result').append(
+					'<li class="list-group-item">'+value.fields.title
+					+'<button data-toggle="modal" data-target="#songAddModal" type="button" title="Ajouter à une playlist" name="'+value.pk
+					+'" class="add_song btn w-25"><img src="{% static "img/add_song.png" %}" class="w-50 h-25"></button></li>');
 			}
 		});
 		$('#result').append('<li class="list-group-item searchcategory">Playlists</li>')
 		$.each(playlists, function(key, value)
 		{
+			var is_saved = false;
 			if (value.fields.name.search(expression) != -1)
 			{
-				$('#result').append('<li class="list-group-item"><a href="/playlist/'+value.pk+'">'+value.fields.name+'</a><button class="save_playlist" type="button" name="save_playlist" class="btn w-25"><img src="{% static "img/save.png" %}" class="w-50 h-25"></button></li>');
+				$.each(saved_playlists, function(pkey, pvalue){
+					if (pvalue.pk == value.pk)
+					{
+						is_saved = true;
+						return false;
+					}
+				});
+				if (is_saved)
+				{
+					$('#result').append('<li class="list-group-item"><a href="/playlist/'+value.pk+'">'+value.fields.name+'</a><button title="Retirer de la bibliothèque" type="button" name="'+value.pk+'" class="unsave_playlist_search btn w-25"><img src="{% static "img/unsave.png" %}" class="w-50 h-25"></button></li>');
+				}
+				else
+				{
+					$('#result').append('<li class="list-group-item"><a href="/playlist/'+value.pk+'">'+value.fields.name+'</a><button title="Sauvegarder" type="button" name="'+value.pk+'" class="save_playlist_search btn w-25"><img src="{% static "img/save.png" %}" class="w-50 h-25"></button></li>');
+				}
 			}
 		});
 		$('#result').append('<li class="list-group-item searchcategory">Albums</li>')
 		$.each(albums, function(key, value)
 		{
+			var is_saved = false;
 			if (value.fields.title.search(expression) != -1)
 			{
-				$('#result').append('<li class="list-group-item"><a href="/album/'+value.pk+'">'+value.fields.title+'</a><button class="save_album" type="button" name="save_album" class="btn w-25"><img src="{% static "img/save.png" %}" class="w-50 h-25"></button></li>');
+				$.each(saved_albums, function(pkey, pvalue){
+					if (pvalue.pk == value.pk)
+					{
+						is_saved = true;
+						return false;
+					}
+				});
+				if (is_saved)
+				{
+					$('#result').append('<li class="list-group-item"><a href="/album/'+value.pk+'">'+value.fields.title+'</a><button title="Retirer de la bibliothèque" type="button" name="'+value.pk+'" class="unsave_album_search btn w-25"><img src="{% static "img/unsave.png" %}" class="w-50 h-25"></button></li>');
+				}
+				else
+				{
+					$('#result').append('<li class="list-group-item"><a href="/album/'+value.pk+'">'+value.fields.title+'</a><button title="Sauvegarder" type="button" name="'+value.pk+'" class="save_album_search btn w-25"><img src="{% static "img/save.png" %}" class="w-50 h-25"></button></li>');
+				}
 			}
 		});
 		$('#result').append('<li class="list-group-item searchcategory">Artists</li>')

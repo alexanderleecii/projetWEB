@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse, JsonResponse
 from playlist.models import Playlist, Song_is_in
 from album.models import Album,Song
 from user.models import User
@@ -25,3 +26,18 @@ def display_playlist(request, id_playlist):
 														 })
 	else:
 		return redirect("login")
+
+def add_song_ajax(request):
+	if request.is_ajax() and request.method == "POST" :
+		user = request.user
+		id_playlist = request.POST.get("id_playlist")
+		id_song = request.POST.get("id_song")
+		playlist = Playlist.objects.get(id_playlist = id_playlist)
+		song = Song.objects.get(id_song = id_song)
+		try:
+			catch = Song_is_in.objects.get(id_playlist = playlist, id_song = song)
+		except Song_is_in.DoesNotExist:
+			song_addition = Song_is_in(id_playlist = playlist, id_song = song)
+			song_addition.save()
+			return HttpResponse(request)
+	return JsonResponse({'message' : "Ce morceau est déjà dans cette playlist"})

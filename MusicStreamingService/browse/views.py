@@ -14,6 +14,11 @@ def home(request):
 		songs = Song.objects.all()
 		artists = Artist.objects.all()
 		users = User.objects.all()
+		
+		created_playlists = Playlist.objects.select_related('creator').filter(creator = request.user.id_user).order_by('update_date')
+		
+		saved_playlists = request.user.saved_playlist.all()
+		saved_albums = request.user.saved_album.all()
 
 		songsjson = serializers.serialize("json", songs)
 		playlistsjson = serializers.serialize("json", playlists)
@@ -21,16 +26,22 @@ def home(request):
 		artistsjson = serializers.serialize("json", artists)
 		usersjson = serializers.serialize("json", users)
 
+		saved_playlists_json = serializers.serialize("json", saved_playlists)
+		saved_albums_json = serializers.serialize("json", saved_albums)
+
 		result = {}
 		result.update(csrf(request))
 		result['playlists'] = playlists.order_by('-update_date')[:4]
 		result['albums'] = albums.order_by('-out_date')[:4]
-		return render(request, 'browse/index.html', {'result' : result, 
+		return render(request, 'browse/index.html', {'result' : result,
+													 'created_playlists' : created_playlists,
 													 'songsjson' : songsjson,
 													 'playlistsjson' : playlistsjson,
 													 'albumsjson' : albumsjson,
 													 'artistsjson' : artistsjson,
-													 'usersjson' : usersjson 
+													 'usersjson' : usersjson,
+													 'saved_playlists_json' : saved_playlists_json,
+													 'saved_albums_json' : saved_albums_json,
 													})
 	else:
 		return redirect("login")
