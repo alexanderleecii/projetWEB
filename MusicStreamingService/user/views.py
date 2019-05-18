@@ -3,20 +3,19 @@ from django.http import JsonResponse, HttpResponse
 from .models import User
 from playlist.models import Playlist
 from album.models import Album
-from playlist.forms import PlaylistCreationForm
+from playlist.forms import PlaylistCreationForm 
 
 def display_user(request, id_user):
 	if request.user.is_authenticated:
 		user = User.objects.get(id_user = id_user)
 		created_playlists = Playlist.objects.select_related('creator').filter(creator = id_user).order_by('update_date')[:3]
 		saved_playlists = user.saved_playlist.all().order_by('update_date')[:3]
-		following_count = user.following_user.all().count()
+		following_count = user.following_user.all().count() + user.following_artist.all().count()
 
 		other_users = User.objects.exclude(id_user = id_user)
 		followers_count = 0
 		for u in other_users:
-			if u.following_user.filter(id_user = id_user).count() == 1 :
-				followers_count+=1
+			followers_count+=u.following_user.filter(id_user = id_user).count()
 		
 		follows = (request.user.following_user.filter(id_user = id_user).count() == 1)
 

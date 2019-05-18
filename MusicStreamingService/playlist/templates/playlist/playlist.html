@@ -2,52 +2,136 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'playlist/css/playlist.css' %}">
 {% block pagecontent %}
+<div id="id_playlist" hidden>{{ Playlist.id_playlist }}</div>
 <div class="container p-0">
 	<div class="row w-100 m-0">
-		<div class="row w-100 m-0">
-			<img src="{% static 'playlist/img/playlist_cover/' %}{{ Playlist.playlist_img }}" alt="{{ Playlist.name }}"
-				 class="w-25 m-auto">
-		</div>
-		<div class="row w-100 m-0">
-			<h1 class="text-center w-100 m-auto">{{ Playlist.name }}</h1>
-		</div>
-		<div class="row w-100 m-0">
-			<div class="col-6 w-100 p-0 m-auto text-center">
-				Date de création : {{ Playlist.creation_date }}
+		<div id="playlist_header">
+			<div class="row w-100 m-0">
+				<img data-target="img" src="{% static 'playlist/img/playlist_cover/' %}{{ Playlist.playlist_img }}" alt="{{ Playlist.name }}" class="w-25 m-auto">
 			</div>
-			<div class="col-6 w-100 p-0 m-auto text-center">
-				Dernière mise-à-jour : {{ Playlist.update_date }}
+			<div class="row w-100 m-0">
+				<h1 data-target="name" class="text-center w-100 m-auto">{{ Playlist.name }}</h1>
+			</div>
+			<div class="row w-100 m-0">
+				<p data-target="description" >{{ Playlist.description }}</p>
+			</div>
+			<div class="row w-100 m-0">
+				<div class="col-6 w-100 p-0 m-auto text-center">
+					Date de création : {{ Playlist.creation_date }}
+				</div>
+				<div data-target="update-date" class="col-6 w-100 p-0 m-auto text-center">
+					Dernière mise-à-jour : {{ Playlist.update_date }}
+				</div>
 			</div>
 		</div>
+		
+		<div class="row w-100 m-0">
 		{% if Playlist.creator_id|stringformat:"i" != request.COOKIES.id %}
-		<div class="row w-100 m-0">
 			{% if not has_saved %}
 				<button id="save_playlist" type="button" name="{{ Playlist.id_playlist }}" class="btn btn-primary">Sauvegarder</button>{% csrf_token %}
 			{% else %}
 				<button id="unsave_playlist" type="button" name="{{ Playlist.id_playlist }}" class="btn btn-secondary">Retirer de sa bibliothèque</button>{% csrf_token %}
 			{% endif %}
-		</div>
+		{% else %}
+			<button id="update_btn" data-id="{{ Playlist.id_playlist }}" type="button" data-toggle="modal" data-target="#playlistUpdateModal" class="btn btn-secondary">
+				Modifier la playlist
+			</button>
+			<div class="modal fade" id="playlistUpdateModal" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<form method="post" enctype="multipart/form-data">{% csrf_token %}
+							<div class="modal-header">
+								<h5 class="modal-title">Modifier une playlist</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								
+								<div class="form-group">
+									<label>Nom : </label>
+									<input type="text" id="name_update" class="form-control">
+								</div>
+
+								<div class="form-group">
+									<label>Description : </label>
+									<input type="text" id="desc_update" class="form-control">
+								</div>
+
+								<div class="form-group">
+									<label>Image : </label>
+									<input type="file" id="img_update">
+								</div>
+
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+								<button data-role="update" data-id="{{ Playlist.id_playlist }}" type="submit" class="btn btn-primary">Modifier</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<button id="delete_btn" data-id="{{ Playlist.id_playlist }}" type="button" data-toggle="modal" data-target="#playlistDeleteModal" class="btn btn-danger">
+				Supprimer la playlist
+			</button>
+			<div class="modal fade" id="playlistDeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">Avertissement</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								
+								<p>Êtes-vous sûr de vouloir supprimer la playlist ?</p>
+
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+								<a href="/user/{{ request.COOKIES.id }}"><button type="button" data-role="delete" data-id="{{ Playlist.id_playlist }}" class="btn btn-danger">Supprimer</button></a>
+							</div>
+					</div>
+				</div>
+			</div>
 		{% endif %}
+		</div>
+		
 	</div>
 
 	<div class="row w-100 m-0">
-		<table class="w-100 m-auto">
-			<tr>
-				<th>Titre</th>
-				<th>Artiste</th>
-				<th>Album</th>
-				<th>Date d'ajout</th>
-				<th>Durée</th>
-			</tr>
-			{% for song in Songs %}
-			<tr>
-				<th>{{ song.song_title }}</th>
-				<th>{{ song.artist_name }}</th>
-				<th>{{ song.album_title }}</th>
-				<th>{{ song.add_date|date:"d/m/y" }}</th>
-				<th>{{ song.song_duration }}</th>
-			</tr>
-			{% endfor %}
+		<table class="w-100 m-auto" id="playlist_songs" data-idplaylist="{{ Playlist.id_playlist }}">
+			<thead>
+				<tr>
+					<th>Titre</th>
+					<th>Artiste</th>
+					<th>Album</th>
+					<th>Date d'ajout</th>
+					<th>Durée</th>
+					{% if Playlist.creator_id|stringformat:"i" == request.COOKIES.id %}
+					<th>Supprimer</th>
+					{% endif %}
+				</tr>
+			</thead>
+			<tbody>
+				{% for song in Songs %}
+				<div class="row w-100 m-0">
+					<tr id="{{ song.id_song }}">
+						<th>{{ song.song_title }}</th>
+						<th>{{ song.artist_name }}</th>
+						<th>{{ song.album_title }}</th>
+						<th>{{ song.add_date|date:"d/m/y" }}</th>
+						<th>{{ song.song_duration }}</th>
+						{% if Playlist.creator_id|stringformat:"i" == request.COOKIES.id %}
+						<th><button data-id="{{ song.id_song }}" data-role="remove" type="button" title="Retirer de la playlist" class="btn w-25"><img src="{% static 'img/remove_song.png' %}" class="w-50 h-25"></button></th>
+						{% endif %}
+					</tr>
+				</div>
+				{% endfor %}
+			</tbody>
 		</table>
 	</div>
 	<div class="row w-100 m-0">

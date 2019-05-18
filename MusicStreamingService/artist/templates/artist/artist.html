@@ -1,1 +1,89 @@
-<h1>Bienvenue sur la page de l'artiste n°{{ id_artist }}</h1>
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'artist/css/artist.css' %}">
+{% block pagecontent %}
+<div class="container p-0">
+	<div class="row w-100 m-0">
+		<div class="col-md-1">
+			<img src="{% static 'artist/img/artist_photo/' %}{{ artist.photo }}">
+		</div>
+		<div class="col-md-11">
+			<div class="row w-100 m-0">
+				<h1 class="text-center w-100 m-auto">{{ artist.name }}</h1>
+			</div>
+			<div class="row w-100 m-0">
+				<a href="/artist/{{ artist.id_artist }}/followers/"><div id="nb_followers_artist">{{ followers_count }}</div> Followers</a>
+			</div>
+			{% if not follows %}
+			<div class="row w-100 m-0">
+				<button id="follow_artist" data-id="{{ artist.id_artist }}" type="button" class="btn btn-primary">Suivre</button>{% csrf_token %}
+			</div>
+			{% else %}
+			<div class="row w-100 m-0">
+				<button id="unfollow_artist" data-id="{{ artist.id_artist }}" type="button" class="btn btn-secondary">Ne plus suivre</button>{% csrf_token %}
+			</div>
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="row w-100 m-0">
+		<div class="row w-100 m-0">
+			<a href="/artist/{{ artist.id_artist }}/albums/"><h3>Albums ></h3></a>
+		</div>
+		<div class="row w-100 m-0">
+			{% for album in albums %}
+			<div class="col-md-3">
+				<a href="/album/{{ album.id_album }}/">
+					<div class="row">
+						<img src="{% static 'album/img/artist_photo/' %}{{ album.album_img }}">
+					</div>
+					<div class="row">
+						{{ album.title }}
+					</div>
+				</a>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+
+	<div class="row w-100 m-0">
+		<div class="row w-100 m-0">
+			<a href="/artist/{{ artist.id_artist }}/appears_in/"><h3>Apparaît dans ces playlists ></h3></a>
+		</div>
+		<div class="row w-100 m-0">
+			{% for playlist in playlists %}
+			<div class="col-md-3">
+				<a href="/playlist/{{ playlist.id_playlist }}/">
+					<div class="row">
+						<img src="{% static 'playlist/img/playlist_cover/' %}{{ playlist.playlist_img }}">
+					</div>
+					<div class="row">
+						{{ playlist.name }}
+					</div>
+				</a>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+
+	<div class="row w-100 m-0">
+		<div class="row w-100 m-0">
+			<a href="/artist/{{ artist.id_artist }}/appears_in/"><h3>Apparaît dans ces albums ></h3></a>
+		</div>
+		<div class="row w-100 m-0">
+			{% for album in album_features %}
+			<div class="col-md-3">
+				<a href="/album/{{ album.id_album }}/">
+					<div class="row">
+						<img src="{% static 'album/img/album_cover/' %}{{ album.album_img }}">
+					</div>
+					<div class="row">
+						{{ album.title }}
+					</div>
+				</a>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+{% endblock %}

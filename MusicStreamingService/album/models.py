@@ -1,13 +1,13 @@
 from django.db import models
 
-# Create your models here.
+# Create your models here. 
 class Album(models.Model):
 	id_album = models.AutoField(primary_key = True)
 	title = models.CharField(max_length = 100)
 	out_date = models.DateField(auto_now_add = True)
 	album_img = models.ImageField(upload_to = "img/album_cover/")
 
-	artist_key = models.ForeignKey("artist.Artist", on_delete = models.CASCADE, default = 1)
+	main_artist = models.ForeignKey("artist.Artist", on_delete = models.CASCADE, default = 1, related_name = "main_artist")
 	
 	class Meta:
 		verbose_name = "album"
@@ -24,7 +24,7 @@ class Song(models.Model):
 	file = models.FileField(upload_to = "songs/")
 
 	album_key = models.ForeignKey("album.Album", on_delete = models.PROTECT, default = 1)
-	features = models.ManyToManyField("artist.Artist", related_name = "appears_in")
+	artist_featured = models.ManyToManyField("artist.Artist", related_name = "appears_in")
 
 	class Meta:
 		verbose_name = "song"
