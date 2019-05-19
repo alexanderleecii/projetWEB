@@ -25,7 +25,7 @@ secret_key = os.environ.get('SECRET_KEY')
 SECRET_KEY = 'secret_key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 
 ALLOWED_HOSTS = ['thawing-springs-40175.herokuapp.com']
 
