@@ -45,7 +45,7 @@ def display_user(request, id_user):
 												  'form' : form,
 												 })
 	else:
-		return redirect("login")
+		return redirect("register")
 
 def display_created_playlists(request, id_user):
 	if request.user.is_authenticated:
@@ -56,7 +56,7 @@ def display_created_playlists(request, id_user):
 															   'playlists' : created_playlists,
 															  })
 	else:
-		return redirect("login")
+		return redirect("register")
 
 def display_saved_playlists(request, id_user):
 	if request.user.is_authenticated:
@@ -67,7 +67,7 @@ def display_saved_playlists(request, id_user):
 															   'playlists' : saved_playlists,
 															  })
 	else:
-		return redirect("login")
+		return redirect("register")
 
 def display_saved_albums(request, id_user):
 	if request.user.is_authenticated:
@@ -78,7 +78,7 @@ def display_saved_albums(request, id_user):
 														  'albums' : saved_albums,
 														 })
 	else:
-		return redirect("login")
+		return redirect("register")
 
 def display_following(request, id_user):
 	if request.user.is_authenticated:
@@ -91,7 +91,7 @@ def display_following(request, id_user):
 													   'artists' : artists,
 													  })
 	else:
-		return redirect("login")
+		return redirect("register")
 
 def display_followers(request, id_user):
 	if request.user.is_authenticated:
@@ -109,7 +109,7 @@ def display_followers(request, id_user):
 													   'followers' : followers,
 													  })
 	else:
-		return redirect("login")
+		return redirect("register")
 
 def save_playlist_ajax(request):
 	if request.is_ajax() and request.method == "POST" :

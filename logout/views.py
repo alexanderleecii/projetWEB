@@ -10,4 +10,4 @@ def logout_view(request):
 		response.delete_cookie("avatar")
 		return response
 	else:
-		return redirect("login")
+		return redirect("register")

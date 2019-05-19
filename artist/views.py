@@ -25,7 +25,7 @@ def display_artist(request, id_artist):
 													  'follows' : follows,
 													 })
 	else:
-		return redirect("login")
+		return redirect("register")
 
 def display_artist_albums(request, id_artist):
 	if request.user.is_authenticated:
@@ -35,7 +35,7 @@ def display_artist_albums(request, id_artist):
 															 'albums' : albums,
 															})
 	else:
-		return redirect("login")
+		return redirect("register")
 
 def followers(request, id_artist):
 	if request.user.is_authenticated:
@@ -45,7 +45,7 @@ def followers(request, id_artist):
 														 'followers' : followers,
 														})
 	else:
-		return redirect("login")
+		return redirect("register")
 
 def artist_is_in_playlist(request, id_artist):
 	if request.user.is_authenticated:
@@ -57,7 +57,7 @@ def artist_is_in_playlist(request, id_artist):
 														 'playlists' : playlists,
 														})
 	else:
-		return redirect("login")
+		return redirect("register")
 
 def display_artist_albums_features(request, id_artist):
 	if request.user.is_authenticated:
@@ -67,7 +67,7 @@ def display_artist_albums_features(request, id_artist):
 															 		  'albums' : albums,
 																	 })
 	else:
-		return redirect("login")
+		return redirect("register")
 
 def follow_artist_ajax(request):
 	if request.is_ajax() and request.method == "POST" :

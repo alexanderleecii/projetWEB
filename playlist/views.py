@@ -29,7 +29,7 @@ def display_playlist(request, id_playlist):
 														  'has_saved' : has_saved,
 														 })
 	else:
-		return redirect("login")
+		return redirect("register")
 
 def add_song_ajax(request):
 	if request.is_ajax() and request.method == "POST" :

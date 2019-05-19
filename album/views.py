@@ -12,4 +12,4 @@ def display_album(request, id_album):
 													'has_saved' : has_saved,
 											   })
 	else:
-		return redirect("login")
+		return redirect("register")

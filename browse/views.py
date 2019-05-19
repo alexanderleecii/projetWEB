@@ -50,16 +50,16 @@ def home(request):
 													 'form' : form,
 													})
 	else:
-		return redirect("login")
+		return redirect("register")
 
 def display_latest_playlists(request):
 	if request.user.is_authenticated:
 		return render(request, 'browse/latest_playlists.html')
 	else:
-		return redirect("login")
+		return redirect("register")
 
 def display_latest_albums(request):
 	if request.user.is_authenticated:
 		return render(request, 'browse/latest_albums.html')
 	else:
-		return redirect("login")
+		return redirect("register")
