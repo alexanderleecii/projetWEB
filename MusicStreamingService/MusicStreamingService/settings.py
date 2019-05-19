@@ -14,14 +14,16 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB_USER = os.environ.get('DB_USER')
-DB_PASSWORD = os.environ.get('DB_PASSWORD')
+db_password = os.environ.get('DB_PASSWORD')
+secret_key = os.environ.get('SECRET_KEY')
+#DB_PASSWORD = os.environ.get('DB_PASSWORD')
+#secret_key = os.environ.get('KEY')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&-fs#9@!xrhz7v)@o+solj=_1w71f=vb)7vwa-3sr^3g&=)2qd'
+SECRET_KEY = 'secret_key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -88,8 +90,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'frzn_db',
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
+        'USER': 'frzn_user',
+        'PASSWORD': db_password,
         'HOST': 'localhost',
         'PORT': '5432',
     },
