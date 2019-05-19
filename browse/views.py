@@ -54,12 +54,14 @@ def home(request):
 
 def display_latest_playlists(request):
 	if request.user.is_authenticated:
-		return render(request, 'browse/latest_playlists.html')
+		playlists = Playlist.objects.all().order_by('-update_date')[:20]
+		return render(request, 'browse/latest_playlists.html', {'playlists' : playlists})
 	else:
 		return redirect("register")
 
 def display_latest_albums(request):
 	if request.user.is_authenticated:
-		return render(request, 'browse/latest_albums.html')
+		albums = Album.objects.all().order_by('-out_date')[:20]
+		return render(request, 'browse/latest_albums.html', {'albums' : albums})
 	else:
 		return redirect("register")

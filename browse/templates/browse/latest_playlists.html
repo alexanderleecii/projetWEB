@@ -1,3 +1,20 @@
 {% extends "base.html" %}
 {% block pagecontent %}
+<div class="container p-0">
+	<div class="row w-100 m-0">
+		<h1 class="text-center w-100 m-auto">Les 20 dernières playlists</h1>
+	</div>
+	{% for playlist in playlists %}
+	<div class="row w-100 m-0">
+		<a href="/playlist/{{ playlist.id_playlist }}/" class="w-100">
+			<div class="col-md-1">
+				<img src="{% static 'playlist/img/playlist_cover/' %}{{ playlist.playlist_img }}" class="w-100 h-100">
+			</div>
+			<div class="col-md-11">
+				{{ playlist.name }}
+			</div>
+		</a>
+	</div>
+	{% endfor %}
+</div>
 {% endblock %}

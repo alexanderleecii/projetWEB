@@ -24,7 +24,7 @@
 				<div class="row text-center w-100">
 					<div id="display_user" class="text-center">
 						{{ request.COOKIES.pseudo }}
-						<img src="user/media/img/user_avatar/frozone.jpg">
+						<img src="{% media 'img/user_avatar/' %}{{ request.COOKIES.avatar }}">
 					</div>
 				</div>
 				<div class="row w-100">
@@ -37,9 +37,6 @@
 					<footer id="footer" class="text-center">
 						<div id="logout" class="row w-100">
 							<a href="/logout/">Déconnexion</a>
-						</div>
-						<div class="row w-100">
-							<a href="/contact/" class="text-light d-block">Contact</a>
 						</div>
 						<div class="row w-100">
 							<a href="https://github.com/alexanderleecii/" target="_blank" class="text-light d-block">Couchy Alexander-Lee</a>
