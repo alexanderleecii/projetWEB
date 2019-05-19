@@ -8,7 +8,7 @@
 	<div class="row w-100 m-0">
 		<a href="/album/{{ album.id_album }}/" class="w-100">
 			<div class="col-md-1">
-				<img src="{% media 'album/img/album_cover/' %}{{ album.album_img }}" class="w-100 h-100">
+				<img src="{{ MEDIA }}'album/img/album_cover/'{{ album.album_img }}" class="w-100 h-100">
 			</div>
 			<div class="col-md-11">
 				{{ album.title }}
