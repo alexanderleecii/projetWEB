@@ -30,22 +30,42 @@ def display_artist(request, id_artist):
 def display_artist_albums(request, id_artist):
 	if request.user.is_authenticated:
 		artist = Artist.objects.get(id_artist = id_artist)
-		albums = Album.objects.select_related('artist_key').filter(main_artist = id_artist).order_by('out_date')
-		return render(request, 'artist/artist_albums.html', {'artist' : artist})
+		albums = Album.objects.filter(main_artist__pk = id_artist)
+		return render(request, 'artist/artist_albums.html', {'artist' : artist,
+															 'albums' : albums,
+															})
 	else:
 		return redirect("login")
 
 def followers(request, id_artist):
 	if request.user.is_authenticated:
-		
-		return render(request, 'artist/followers.html', {'id_artist' : id_artist})
+		artist = Artist.objects.get(id_artist = id_artist)
+		followers = User.objects.filter(following_artist__pk = id_artist)
+		return render(request, 'artist/followers.html', {'artist' : artist,
+														 'followers' : followers,
+														})
 	else:
 		return redirect("login")
 
 def artist_is_in_playlist(request, id_artist):
 	if request.user.is_authenticated:
-		
-		return render(request, 'artist/playlists.html', {'id_artist' : id_artist})
+		artist = Artist.objects.get(id_artist = id_artist)
+		song_features = Song.objects.filter(artist_featured__pk = id_artist)
+		songs_query = Song_is_in.objects.filter(id_song__in = song_features.values('id_song'))
+		playlists = Playlist.objects.filter(id_playlist__in = songs_query.values('id_playlist')).distinct()
+		return render(request, 'artist/playlists.html', {'artist' : artist,
+														 'playlists' : playlists,
+														})
+	else:
+		return redirect("login")
+
+def display_artist_albums_features(request, id_artist):
+	if request.user.is_authenticated:
+		artist = Artist.objects.get(id_artist = id_artist)
+		albums = Album.objects.select_related('main_artist').filter(main_artist = id_artist).order_by('out_date')
+		return render(request, 'artist/artist_albums_features.html', {'artist' : artist,
+															 		  'albums' : albums,
+																	 })
 	else:
 		return redirect("login")
 

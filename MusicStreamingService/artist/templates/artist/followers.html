@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'user/css/user.css' %}">
+{% block pagecontent %}
+<div class="container p-0">
+	<div class="row w-100 m-0">
+		<h1 class="text-center w-100 m-auto">Utilisateurs qui suivent {{ artist.name }}</h1>
+	</div>
+	{% for follower in followers %}
+	<div class="row w-100 m-0">
+		<a href="/user/{{ follower.id_user }}/" class="w-100">
+			<div class="col-md-1">
+				<img src="{% static 'user/img/user_avatar/' %}{{ follower.profile_pic }}" class="w-100 h-100">
+			</div>
+			<div class="col-md-11">
+				{{ follower.pseudo }}
+			</div>
+		</a>
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}

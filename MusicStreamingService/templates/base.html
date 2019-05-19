@@ -65,22 +65,30 @@
 	<script>
 		$(document).on("click", ".add_song", function(){
 			var id_song = $(this).attr("name");
-			$(document).on("click", "#addsong", function(){
-			    $.ajax({
-			    	method: "POST",
-		            url: "{% url 'add_song_ajax' %}",
-		            data: {"id_playlist": $(this).attr("name"),
-		            	   "id_song": id_song,
-		            	   "csrfmiddlewaretoken": "{{ csrf_token }}"
-		        	},
-		            success: function(data){
-		            	if (data.message == "Ce morceau est déjà dans cette playlist")
-		            	{
-		            		alert(data.message);
-		            	}	
-		            }
-			    })
-			    $('#songAddModal').modal("hide");
+			var ajaxLoading = false; //ajaxLoading permet d'éviter le double envoi du POST par la fonction AJAX
+			$(document).on("click", "#addsong", function(event){
+			    event.preventDefault();
+			    if(!ajaxLoading)
+			    {
+			    	ajaxLoading = true;
+			    	$.ajax({
+				    	method: "POST",
+			            url: "{% url 'add_song_ajax' %}",
+			            data: {"id_playlist": $(this).attr("name"),
+			            	   "id_song": id_song,
+			            	   "csrfmiddlewaretoken": "{{ csrf_token }}"
+			        	},
+			            success: function(data){
+			            	if (data.message == 0)
+			            	{
+			            		alert("Ce morceau est déjà dans cette playlist");
+			            		ajaxLoading = false;
+			            	}
+			            }
+				    })
+				    $('#songAddModal').modal("hide");
+			    }
+			    
 			});
 		});
 	</script>
@@ -124,6 +132,7 @@
 				$.ajax({
 					method: "POST",
 					url: "{% url 'update_playlist_ajax' %}",
+					async:false,
 					data: {"id_playlist" : id_playlist,
 						   "name" : name,
 						   "description" : description,

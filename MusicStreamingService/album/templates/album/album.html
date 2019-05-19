@@ -8,6 +8,9 @@
 			<h1 class="text-center w-100 m-auto">{{ Album.title }}</h1>
 		</div>
 		<div class="row w-100 m-0">
+			<h3 class="text-center w-100 m-auto">Par <a href="/artist/{{ Album.main_artist.id_artist }}/">{{ Album.main_artist.name }}</a></h3>
+		</div>
+		<div class="row w-100 m-0">
 				<p class="w-100 m-auto text-center">Date de sortie: {{ Album.out_date }}</p>
 		</div>
 		<div class="row w-100 m-0">

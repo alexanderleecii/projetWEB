@@ -121,8 +121,8 @@
 				<div class="row w-100 m-0">
 					<tr id="{{ song.id_song }}">
 						<th>{{ song.song_title }}</th>
-						<th>{{ song.artist_name }}</th>
-						<th>{{ song.album_title }}</th>
+						<th><a href="/artist/{{ song.id_artist }}/">{{ song.artist_name }}</th>
+						<th><a href="/album/{{ song.id_album }}/">{{ song.album_title }}</a></th>
 						<th>{{ song.add_date|date:"d/m/y" }}</th>
 						<th>{{ song.song_duration }}</th>
 						{% if Playlist.creator_id|stringformat:"i" == request.COOKIES.id %}

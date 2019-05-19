@@ -19,7 +19,9 @@ def display_playlist(request, id_playlist):
 				'song_duration' : song.id_song.duration,
 				'add_date' : song.add_date,
 				'artist_name' : song.id_song.album_key.main_artist.name,
-				'album_title' : song.id_song.album_key.title
+				'album_title' : song.id_song.album_key.title,
+				'id_album' : song.id_song.album_key.id_album,
+				'id_artist' : song.id_song.album_key.main_artist.id_artist
 			})
 
 		return render(request, 'playlist/playlist.html', {'Playlist' : playlist,
@@ -36,13 +38,14 @@ def add_song_ajax(request):
 		id_song = request.POST.get("id_song")
 		playlist = Playlist.objects.get(id_playlist = id_playlist)
 		song = Song.objects.get(id_song = id_song)
+		result = 0
 		try:
 			catch = Song_is_in.objects.get(id_playlist = playlist, id_song = song)
 		except Song_is_in.DoesNotExist:
 			song_addition = Song_is_in(id_playlist = playlist, id_song = song)
 			song_addition.save()
-			return HttpResponse(request)
-	return JsonResponse({'message' : "Ce morceau est déjà dans cette playlist"})
+			result = 1
+	return JsonResponse({'message' : result})
 
 def remove_song_ajax(request):
 	if request.is_ajax() and request.method == "POST" :
