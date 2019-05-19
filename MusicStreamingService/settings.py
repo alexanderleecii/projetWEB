@@ -16,8 +16,6 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 db_password = os.environ.get('DB_PASSWORD')
 secret_key = os.environ.get('SECRET_KEY')
-#DB_PASSWORD = os.environ.get('DB_PASSWORD')
-#secret_key = os.environ.get('KEY')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -28,7 +26,7 @@ SECRET_KEY = 'secret_key'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['thawing-springs-40175.herokuapp.com']
 
 
 # Application definition
