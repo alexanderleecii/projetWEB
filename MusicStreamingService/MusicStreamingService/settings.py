@@ -149,3 +149,9 @@ MEDIA_URL = os.path.join(BASE_DIR, 'media/')
 # Cookies
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+
+# Cloud storage
+
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_BUCKET_NAME = 'django-music-streaming-projetweb'
+GS_FILE_OVERWRITE = False

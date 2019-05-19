@@ -150,6 +150,7 @@ $(document).ready(function(){
 					+'" class="add_song btn w-25"><img src="{% static "img/add_song.png" %}" class="w-50 h-25"></button></li>');
 			}
 		});
+		$('#result').append('<a href="/search/'+searchField+'/songs/"><li class="list-group-item text-center">Voir tout</li></a>')
 		$('#result').append('<li class="list-group-item searchcategory">Playlists</li>')
 		$.each(playlists, function(key, value)
 		{
@@ -173,6 +174,7 @@ $(document).ready(function(){
 				}
 			}
 		});
+		$('#result').append('<a href="/search/'+searchField+'/playlists/"><li class="list-group-item text-center">Voir tout</li></a>')
 		$('#result').append('<li class="list-group-item searchcategory">Albums</li>')
 		$.each(albums, function(key, value)
 		{
@@ -196,6 +198,7 @@ $(document).ready(function(){
 				}
 			}
 		});
+		$('#result').append('<a href="/search/'+searchField+'/albums/"><li class="list-group-item text-center">Voir tout</li></a>')
 		$('#result').append('<li class="list-group-item searchcategory">Artists</li>')
 		$.each(artists, function(key, value)
 		{
@@ -204,6 +207,7 @@ $(document).ready(function(){
 				$('#result').append('<li class="list-group-item"><a href="/artist/'+value.pk+'">'+value.fields.name+'</a></li>');
 			}
 		});
+		$('#result').append('<a href="/search/'+searchField+'/artist/"><li class="list-group-item text-center">Voir tout</li></a>')
 		$('#result').append('<li class="list-group-item searchcategory">Users</li>')
 		$.each(users, function(key, value)
 		{
@@ -212,6 +216,7 @@ $(document).ready(function(){
 				$('#result').append('<li class="list-group-item"><a href="/user/'+value.pk+'">'+value.fields.pseudo+'</a></li>');
 			}
 		});
+		$('#result').append('<a href="/search/'+searchField+'/users/"><li class="list-group-item text-center">Voir tout</li></a>')
  	});
 	$('#pagecontent').click(function(){
 	    $('#result').html('');
