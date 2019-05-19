@@ -1,1 +1,1 @@
-web: gunicorn MusicStreamingService/MusicStreamingService.wsgi
+web: gunicorn MusicStreamingService.MusicStreamingService.wsgi
