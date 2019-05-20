@@ -159,6 +159,6 @@ SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 GS_BUCKET_NAME = 'django-music-streaming-projetweb'
 GS_FILE_OVERWRITE = False
-GS_CREDENTIALS = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file("MyFirstProject-6832cfdda5b3.json")
 
 django_heroku.settings(locals())
