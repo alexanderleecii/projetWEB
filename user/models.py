@@ -7,9 +7,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 	id_user = models.AutoField(primary_key = True)
 	surname = models.CharField(max_length = 50)
 	name = models.CharField(max_length = 50)
-	pseudo = models.CharField(max_length = 50)
+	pseudo = models.CharField(max_length = 50, unique = True)
 	email = models.EmailField(max_length = 254, unique = True)
-	profile_pic = models.ImageField(upload_to = "img/user_avatar/")
+	profile_pic = models.ImageField(upload_to = "media/img/user_avatar/", blank = True, null = True)
 	is_staff = models.BooleanField(default = False)
 
 	saved_playlist = models.ManyToManyField("playlist.Playlist", related_name = "saver")

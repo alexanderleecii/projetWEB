@@ -62,8 +62,9 @@ def artist_is_in_playlist(request, id_artist):
 def display_artist_albums_features(request, id_artist):
 	if request.user.is_authenticated:
 		artist = Artist.objects.get(id_artist = id_artist)
-		albums = Album.objects.select_related('main_artist').filter(main_artist = id_artist).order_by('out_date')
-		return render(request, 'artist/artist_albums_features.html', {'artist' : artist,
+		song_features = Song.objects.filter(artist_featured__pk = id_artist)
+		albums = Album.objects.filter(song__in = song_features).exclude(main_artist__pk = id_artist).distinct()
+		return render(request, 'artist/artist_album_features.html', {'artist' : artist,
 															 		  'albums' : albums,
 																	 })
 	else:

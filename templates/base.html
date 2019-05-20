@@ -24,8 +24,12 @@
 				</div>
 				<div class="row text-center w-100">
 					<div id="display_user" class="text-center">
+						{% if request.COOKIES.avatar %}
+						<img src="{{ request.COOKIES.avatar.url }}">
+						{% else %}
+						<img src="https://storage.cloud.google.com/django-music-streaming-projetweb/media/img/user_avatar/default_profile.png?_ga=2.227823261.-1066403754.1557338354&_gac=1.125043448.1557338606.CjwKCAjw_MnmBRAoEiwAPRRWWxh1t7cOnX5BDfRslZ1pUaXodco95ZZO7NCk0sykenlvSNtv-RhBxhoCIOYQAvD_BwE" class="w-25">
+						{% endif %}
 						{{ request.COOKIES.pseudo }}
-						<img src="{{ MEDIA }}'img/user_avatar/'{{ request.COOKIES.avatar }}">
 					</div>
 				</div>
 				<div class="row w-100">
@@ -80,7 +84,6 @@
 			            	if (data.message == 0)
 			            	{
 			            		alert("Ce morceau est déjà dans cette playlist");
-			            		ajaxLoading = false;
 			            	}
 			            }
 				    })
@@ -124,8 +127,6 @@
 				var name = $("#name_update").val();
 				
 				var description = $("#desc_update").val();
-				
-				var img = $("#img_update").val();
 
 				$.ajax({
 					method: "POST",

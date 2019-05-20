@@ -1,4 +1,5 @@
 from django.db import models
+from MusicStreamingService.settings import MEDIA_URL
 
 # Create your models here.
 class Playlist(models.Model):
@@ -7,7 +8,7 @@ class Playlist(models.Model):
 	description = models.CharField(max_length = 200)
 	creation_date = models.DateField(auto_now_add = True)
 	update_date = models.DateTimeField(auto_now = True)
-	playlist_img = models.ImageField(upload_to = "img/playlist_cover/", null = True, blank = True)
+	playlist_img = models.ImageField(upload_to = "media/img/playlist_cover/", null = True, blank = True)
 
 	creator = models.ForeignKey("user.User", on_delete = models.CASCADE, default = 1)
 
