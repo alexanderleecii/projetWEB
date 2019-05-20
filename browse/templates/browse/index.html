@@ -134,7 +134,7 @@ $(document).ready(function(){
 		}
 	});
 	$('#results').hide();
-	$('#search').click(function(){
+	$('#search').keyup(function(){
 		$('#results').show();
 		$('#result').html('');
 		$('#state').val('');
