@@ -159,6 +159,6 @@ SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 GS_BUCKET_NAME = 'django-music-streaming-projetweb'
 GS_FILE_OVERWRITE = False
-GS_CREDENTIALS = service_account.Credentials.from_service_account_file(urlopen("https://storage.cloud.google.com/django-music-streaming-projetweb/MyFirstProject-6832cfdda5b3.json?_ga=2.223170203.-1066403754.1557338354&_gac=1.154865226.1557338606.CjwKCAjw_MnmBRAoEiwAPRRWWxh1t7cOnX5BDfRslZ1pUaXodco95ZZO7NCk0sykenlvSNtv-RhBxhoCIOYQAvD_BwE").read())
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(urlopen("https://storage.cloud.google.com/django-music-streaming-projetweb/MyFirstProject-6832cfdda5b3.json?_ga=2.223170203.-1066403754.1557338354&_gac=1.154865226.1557338606.CjwKCAjw_MnmBRAoEiwAPRRWWxh1t7cOnX5BDfRslZ1pUaXodco95ZZO7NCk0sykenlvSNtv-RhBxhoCIOYQAvD_BwE"))
 
 django_heroku.settings(locals())
