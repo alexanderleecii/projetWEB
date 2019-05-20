@@ -5,7 +5,7 @@ class Album(models.Model):
 	id_album = models.AutoField(primary_key = True)
 	title = models.CharField(max_length = 100)
 	out_date = models.DateField(auto_now_add = True)
-	album_img = models.ImageField(upload_to = "img/album_cover/")
+	album_img = models.ImageField(upload_to = "media/img/album_cover/")
 
 	main_artist = models.ForeignKey("artist.Artist", on_delete = models.CASCADE, default = 1, related_name = "main_artist")
 	
