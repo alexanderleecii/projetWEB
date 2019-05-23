@@ -28,11 +28,13 @@
 	<div class="row w-100 m-0">
 		<table>
 			<tr>
+				<th></th>
 				<th>Titre</th>
 				<th>Durée</th>
 			</tr>
 			{% for song in Songs %}
 			<tr>
+				<th><audio src="{{ song.file.url }}" preload controls></audio></th>
 				<th>{{ song.title }}</th>
 				<th>{{ song.duration }}</th>
 			</tr>
