@@ -153,7 +153,7 @@ $(document).ready(function(){
 			if (value.fields.title.search(expression) != -1)
 			{
 				$('#result').append(
-					'<li class="list-group-item"><audio src="'+value.fields.file+'" controls></audio>'+value.fields.title
+					'<li class="list-group-item"><audio src="'+value.fields.file.url+'" controls></audio>'+value.fields.title
 					+'<button data-toggle="modal" data-target="#songAddModal" type="button" title="Ajouter à une playlist" name="'+value.pk
 					+'" class="add_song btn w-25"><img src="{% static "img/add_song.png" %}" class="w-50 h-25"></button></li>');
 			}
