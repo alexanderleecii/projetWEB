@@ -120,9 +120,7 @@
 				<div class="row w-100 m-0">
 					<tr id="{{ song.id_song }}">
 						<th>
-							<audio controls>
-								<source src="{{ song.file }}" type="audio/mpeg">
-							</audio>
+							{{ song.file.url }}
 						</th>
 						<th>{{ song.song_title }}</th>
 						<th><a href="/artist/{{ song.id_artist }}/">{{ song.artist_name }}</th>
