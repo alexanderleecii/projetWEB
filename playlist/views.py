@@ -15,6 +15,7 @@ def display_playlist(request, id_playlist):
 		for song in songs_query:
 			songs.append({
 				'id_song' : song.id_song.id_song,
+				'file' : song.id_song.file,
 				'song_title' : song.id_song.title,
 				'song_duration' : song.id_song.duration,
 				'add_date' : song.add_date,

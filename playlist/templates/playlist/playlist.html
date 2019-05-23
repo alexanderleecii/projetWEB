@@ -119,9 +119,7 @@
 				{% for song in Songs %}
 				<div class="row w-100 m-0">
 					<tr id="{{ song.id_song }}">
-						<th>
-							<audio src="{{ song.file.url }}" controls></audio>
-						</th>
+						<th><audio src="{{ song.file.url }}" controls></audio></th>
 						<th>{{ song.song_title }}</th>
 						<th><a href="/artist/{{ song.id_artist }}/">{{ song.artist_name }}</th>
 						<th><a href="/album/{{ song.id_album }}/">{{ song.album_title }}</a></th>
