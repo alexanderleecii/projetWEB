@@ -10,7 +10,11 @@
 	<div class="row w-100 m-0">
 		<a href="/playlist/{{ playlist.id_playlist }}/" class="w-100">
 			<div class="col-md-1">
-				<img src="{% static 'playlist/img/playlist_cover/' %}{{ playlist.playlist_img }}" class="w-100 h-100">
+				{% if playlist.playlist_img %}
+				<img src="{{ playlist.playlist_img.url }}" class="w-100 h-100">
+				{% else %}
+				<img src="https://storage.cloud.google.com/django-music-streaming-projetweb/img/playlist_cover/no_image.png?_ga=2.260579981.-1066403754.1557338354&_gac=1.146482758.1557338606.CjwKCAjw_MnmBRAoEiwAPRRWWxh1t7cOnX5BDfRslZ1pUaXodco95ZZO7NCk0sykenlvSNtv-RhBxhoCIOYQAvD_BwE" class="w-100 h-100">
+				{% endif %}
 			</div>
 			<div class="col-md-11">
 				{{ playlist.name }}
