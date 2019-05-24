@@ -13,7 +13,7 @@
 				{% if follower.profile_pic %}
 				<img src="{{ follower.profile_pic.url }}">
 				{% else %}
-				<img src="https://storage.cloud.google.com/django-music-streaming-projetweb/media/img/user_avatar/default_profile.png?_ga=2.227823261.-1066403754.1557338354&_gac=1.125043448.1557338606.CjwKCAjw_MnmBRAoEiwAPRRWWxh1t7cOnX5BDfRslZ1pUaXodco95ZZO7NCk0sykenlvSNtv-RhBxhoCIOYQAvD_BwE">
+				<img src="{% static 'img/default_profile.png' %}">
 				{% endif %}
 			</div>
 			<div class="col-md-11">
