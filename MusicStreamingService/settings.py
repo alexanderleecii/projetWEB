@@ -148,7 +148,7 @@ STATICFILES_DIRS = (
 
 MEDIA_ROOT = 'https://console.cloud.google.com/storage/browser/django-music-streaming-projetweb/media/?project=totemic-life-241102/media'
 
-MEDIA_URL = 'https://console.cloud.google.com/storage/browser/django-music-streaming-projetweb/media/?project=totemic-life-241102/media'
+MEDIA_URL = 'https://console.cloud.google.com/storage/browser/django-music-streaming-projetweb/media/?project=totemic-life-241102/media/'
 
 # Cookies
 
