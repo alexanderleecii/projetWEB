@@ -4,28 +4,21 @@ body, html{
 .row{
 	margin-left:0 !important;
 }
-#logo, #display_user, #nav_frzn{
+#display_user, #nav_frzn{
 	width: 100%;
 }
 #display_user, #nav_frzn{
 	position: absolute;
 }
+
 #display_user{
 	top:15%;
 }
+
 #nav_frzn{
 	top: 35%;
 }
 
-#aside{
-	padding:0;
-}
-#logo{
-	position: absolute;
-	top:0;
-	margin-top: 10%;
-	margin-bottom: 10%;
-}
 #display_user{
 	margin-top: 5%;
 	margin-bottom: 5%;
