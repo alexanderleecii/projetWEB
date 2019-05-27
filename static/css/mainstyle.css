@@ -35,6 +35,13 @@ body, html{
 	padding-left:0;
 	padding-right:0;
 }
+#profile_miniature{
+	height:100%;
+}
+.navbar-text{
+	height: 100%;
+	padding:0 !important;
+}
 
 #logout{
 	margin-left : 0 !important;
