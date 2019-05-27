@@ -55,7 +55,7 @@ body, html{
 .sidebar {
   margin: 0;
   padding: 0;
-  width: 200px;
+  width: 25%;
   background-color: #01110f;
   position: fixed;
   height: 100%;
@@ -103,5 +103,6 @@ div.content {
 }
 
 .mainsection{
+	width:75%;
 	padding: 0;
 }
