@@ -18,7 +18,14 @@
 		<div class="wrapper row h-100 w-100">	
 			<nav id="topnav" class="navbar navbar-expand-sm navbar-dark sticky-top">
 				<a href="/browse/" class="navbar-brand"><img id="logo" src="{% static 'img/logo.png' %}"></a>
-				<span class="navbar-text">{{ request.COOKIES.pseudo }}</span>
+				<span class="navbar-text">
+					{% if request.COOKIES.avatar %}
+					<img src="{{ request.COOKIES.avatar.url }}">
+					{% else %}
+					<img src="{% static 'img/default_profile.png' %}">
+					{% endif %}
+					{{ request.COOKIES.pseudo }}
+				</span>
 				<ul class="navbar-nav">
 					<li class="nav-item">
 						<a href="/user/{{ request.COOKIES.id }}/" class="nav-link">Mon profil</a>
@@ -28,6 +35,14 @@
 						<a href="/browse/" class="nav-link">Accueil</a>
 					</li>
 				</ul>
+				<div>
+						<div id="logout">
+							<a href="/logout/">Déconnexion</a>
+						</div>
+						<div>
+							<a href="https://github.com/alexanderleecii/" target="_blank" class="text-light">Couchy Alexander-Lee</a>
+						</div>
+				</div>
 			</nav>
 				<!--<div class="row d-block w-100">
 					<div id="logo" class="text-center">
@@ -50,15 +65,13 @@
 						<a href="/browse/" class="nav-link text-light w-100 d-block">Accueil</a></li>
 					</nav>
 				</div>
-				<div class="row w-100">
-					<footer id="footer" class="text-center">
+				<div>
 						<div id="logout" class="row w-100">
 							<a href="/logout/">Déconnexion</a>
 						</div>
 						<div class="row w-100">
 							<a href="https://github.com/alexanderleecii/" target="_blank" class="text-light d-block">Couchy Alexander-Lee</a>
 						</div>
-					</footer>
 				</div>-->
 
 			<div class="mainsection">
