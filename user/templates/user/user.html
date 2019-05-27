@@ -3,30 +3,30 @@
 <link rel="stylesheet" type="text/css" href="{% static 'user/css/user.css' %}">
 {% block pagecontent %}
 <div class="container p-0">
-	<div class="row w-100 m-0">
-		<div class="col-md-1">
+	<div class="row m-0">
+		<div class="row m-0">
 			{% if user.profile_pic %}
 			<img class="preview" src="{{ user.profile_pic.url }}">
 			{% else %}
 			<img class="preview" src="{% static 'img/default_profile.png' %}">
 			{% endif %}
 		</div>
-		<div class="col-md-11">
-			<div class="row w-100 m-0">
+		<div class="row m-0">
+			<div class="row m-0">
 				<h1 class="text-center w-100 m-auto">{{ user.pseudo }}</h1>
 			</div>
-			<div class="row w-100 m-0">
+			<div class="row m-0">
 				<a href="/user/{{ user.id_user }}/followers/"><div id="nb_followers">{{ followers_count }}</div> Followers</a>
 				|
 				<a href="/user/{{ user.id_user }}/following/"><div id="nb_following">{{ following_count }}</div> Following</a>
 			</div>
 			{% if user.id_user|stringformat:"i" != request.COOKIES.id %}
 				{% if not follows %}
-				<div class="row w-100 m-0">
+				<div class="row m-0">
 					<button id="follow" type="button" name="{{ user.id_user }}" class="btn btn-primary">Suivre</button>{% csrf_token %}
 				</div>
 				{% else %}
-				<div class="row w-100 m-0">
+				<div class="row m-0">
 					<button id="unfollow" type="button" name="{{ user.id_user }}" class="btn btn-secondary">Ne plus suivre</button>{% csrf_token %}
 				</div>
 				{% endif %}
