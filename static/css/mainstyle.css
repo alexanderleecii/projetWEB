@@ -82,6 +82,10 @@ body, html{
 	margin: auto;
 }
 
+.foll_count{
+	width: 10%;
+	margin: auto;
+}
 .wrapper{
 	width:100%;
 }

@@ -15,10 +15,10 @@
 			<div class="row w-100 m-0">
 				<h1 class="text-center w-100 m-auto">{{ user.pseudo }}</h1>
 			</div>
-			<div class="row w-100 m-0">
-				<a href="/user/{{ user.id_user }}/followers/"><div id="nb_followers">{{ followers_count }}</div> Followers</a>
+			<div class="row w-100 m-auto text-center">
+				<a class="foll_count" href="/user/{{ user.id_user }}/followers/"><div id="nb_followers">{{ followers_count }}</div> Followers</a>
 				|
-				<a href="/user/{{ user.id_user }}/following/"><div id="nb_following">{{ following_count }}</div> Following</a>
+				<a class="foll_count" href="/user/{{ user.id_user }}/following/"><div id="nb_following">{{ following_count }}</div> Following</a>
 			</div>
 			{% if user.id_user|stringformat:"i" != request.COOKIES.id %}
 				{% if not follows %}
