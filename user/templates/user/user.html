@@ -6,9 +6,9 @@
 	<div class="row m-0">
 		<div class="row w-100 m-0">
 			{% if user.profile_pic %}
-			<img class="preview" src="{{ user.profile_pic.url }}">
+			<img class="profile_pic" src="{{ user.profile_pic.url }}">
 			{% else %}
-			<img class="preview" src="{% static 'img/default_profile.png' %}">
+			<img class="profile_pic" src="{% static 'img/default_profile.png' %}">
 			{% endif %}
 		</div>
 		<div class="row w-100 m-0">

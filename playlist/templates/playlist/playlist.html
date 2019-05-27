@@ -8,9 +8,9 @@
 		<div id="playlist_header">
 			<div class="row w-100 m-0">
 				{% if Playlist.playlist_img %}
-				<img data-target="img" src="{{ Playlist.playlist_img.url }}" alt="{{ Playlist.name }}" class="w-25 m-auto">
+				<img class="profile_pic" data-target="img" src="{{ Playlist.playlist_img.url }}" alt="{{ Playlist.name }}">
 				{% else %}
-				<img data-target="img" src="{% static 'img/no_image.png' %}" alt="{{ Playlist.name }}" class="w-25 m-auto">
+				<img class="profile_pic" data-target="img" src="{% static 'img/no_image.png' %}" alt="{{ Playlist.name }}">
 				{% endif %}
 			</div>
 			<div class="row w-100 m-0">

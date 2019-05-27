@@ -76,6 +76,12 @@ body, html{
 	height:95%;
 }
 
+.profile_pic{
+	width: 20em;
+	height: 20em;
+	margin: auto;
+}
+
 .wrapper{
 	width:100%;
 }
