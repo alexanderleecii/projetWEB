@@ -15,8 +15,8 @@
 		{% endblock %}
 	</head>
 	<body>  
-		<div id="leftnav" class="row h-100 w-100">	
-			<div class="col-md-3 d-none d-md-block bg-dark h-100 p-0">
+		<div class="wrapper row h-100 w-100">	
+			<div id="leftnav" class="col-3">
 				<div class="row d-block w-100">
 					<div id="logo" class="text-center">
 						<a href="/browse/"><img src="{% static 'img/logo.png' %}" class="w-25"></a>
@@ -50,7 +50,7 @@
 				</div>
 			</div>
 
-			<div class="mainsection col-md-9">
+			<div class="mainsection col-9">
 			<section class="h-100">
 				{% block pagecontent %}{% endblock %}
 			</section>

@@ -48,7 +48,14 @@ body, html{
 	margin-right : 0 !important;
 }
 
-#leftnav a{
+#leftnav{
+	background-color: #011311;
+	position: fixed;
+	left: 0;
+	height: 100%;
+}
+
+.wrapper a{
 	width:100%;
 }
 
@@ -57,6 +64,10 @@ body, html{
 	height:95%;
 }
 
+.wrapper{
+	width:100%;
+}
 .mainsection{
+	left:25%;
 	padding: 0;
 }
