@@ -48,7 +48,9 @@ body, html{
 #logo{
 	height: 100%;
 }
-
+#content{
+	margin-top:2%;
+}
 .navbar {
 	width: 100%;
 	height:10%;
