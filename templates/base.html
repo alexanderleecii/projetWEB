@@ -15,35 +15,29 @@
 		{% endblock %}
 	</head>
 	<body>  
-		<div id="leftnav" class="row h-100 w-100">	
-			<div class="col-md-3 d-none d-md-block bg-dark h-100 p-0">
-				<div class="row d-block w-100">
-					<div id="logo" class="text-center">
-						<a href="/browse/"><img src="{% static 'img/logo.png' %}" class="w-25"></a>
-					</div>
-				</div>
-				<div class="row text-center w-100">
-					<div id="display_user" class="text-center">
+		<div class="wrapper container">	
+			
+			<div class="sidebar col-md-3">
+				<a href="/browse/"><img src="{% static 'img/logo.png' %}" class="w-50"></a>
+
+				<div id="display_user" class="row">
 						{% if request.COOKIES.avatar %}
 						<img src="{{ request.COOKIES.avatar.url }}">
 						{% else %}
 						<img src="{% static 'img/default_profile.png' %}" class="w-25">
 						{% endif %}
 						{{ request.COOKIES.pseudo }}
-					</div>
 				</div>
-				<div class="row w-100">
-					<nav id="nav_frzn" class="nav flex-column text-center">
-						<a href="/user/{{ request.COOKIES.id }}/" class="nav-link text-light w-100 d-block">Mon profil</a></li>
-						<a href="/browse/" class="nav-link text-light w-100 d-block">Accueil</a></li>
-					</nav>
-				</div>
-				<div class="row w-100">
+
+				<a href="/user/{{ request.COOKIES.id }}/" class="nav-link text-light w-100 d-block">Mon profil</a>
+				<a href="/browse/" class="nav-link text-light w-100 d-block">Accueil</a>
+
+				<div class="row">
 					<footer id="footer" class="text-center">
-						<div id="logout" class="row w-100">
+						<div id="logout" class="row">
 							<a href="/logout/">Déconnexion</a>
 						</div>
-						<div class="row w-100">
+						<div class="row">
 							<a href="https://github.com/alexanderleecii/" target="_blank" class="text-light d-block">Couchy Alexander-Lee</a>
 						</div>
 					</footer>
@@ -51,10 +45,11 @@
 			</div>
 
 			<div class="mainsection col-md-9">
-			<section class="h-100">
-				{% block pagecontent %}{% endblock %}
-			</section>
+				<section class="h-100">
+					{% block pagecontent %}{% endblock %}
+				</section>
 			</div>
+
 		</div>
 	</body>
 	<script>
