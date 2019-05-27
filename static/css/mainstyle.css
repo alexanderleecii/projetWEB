@@ -50,8 +50,9 @@ body, html{
 
 #topnav{
 	background-color: #011311;
-	position: fixed;
-	left: 0;
+}
+
+#logo{
 	height: 100%;
 }
 
