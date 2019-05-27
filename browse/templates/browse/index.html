@@ -85,9 +85,9 @@
 					<a href="/playlist/{{ playlist.id_playlist }}/">
 						<div class="row">
 							{% if playlist.playlist_img %}
-							<img src="{{ playlist.playlist_img.url }}">
+							<img class="preview" src="{{ playlist.playlist_img.url }}">
 							{% else %}
-							<img src="{% static 'img/no_image.png' %}">
+							<img class="preview" src="{% static 'img/no_image.png' %}">
 							{% endif %}
 						</div>
 						<div class="row">
@@ -107,7 +107,7 @@
 				<div class="col-md-3">
 					<a href="/album/{{ album.id_album }}/">	
 						<div class="row">
-							<img src="{{ album.album_img.url }}">
+							<img class="preview" src="{{ album.album_img.url }}">
 						</div>
 						<div class="row">
 							{{ album.title }}

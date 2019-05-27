@@ -44,9 +44,9 @@
 				<a href="/playlist/{{ playlist.id_playlist }}/">
 					<div class="row">
 						{% if playlist.playlist_img %}
-						<img src="{{ playlist.playlist_img.url }}">
+						<img class="preview" src="{{ playlist.playlist_img.url }}">
 						{% else %}
-						<img src="{% static 'img/no_image.png' %}">
+						<img class="preview" src="{% static 'img/no_image.png' %}">
 						{% endif %}
 					</div>
 					<div class="row">
@@ -59,7 +59,7 @@
 				<div class="row">
 					{% if user.id_user|stringformat:"i" == request.COOKIES.id %}
 					<button type="button" data-toggle="modal" data-target="#playlistModal">
-						<img src="{% static 'user/img/display_playlist/' %}add_to_playlist.png" class="w-50 h-90">
+						<img class="preview" src="{% static 'user/img/display_playlist/' %}add_to_playlist.png" class="w-50 h-90">
 					</button>
 					<div class="modal fade" id="playlistModal" tabindex="-1" role="dialog" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered" role="document">
@@ -98,9 +98,9 @@
 				<a href="/playlist/{{ playlist.id_playlist }}/">
 					<div class="row">
 						{% if playlist.playlist_img %}
-						<img src="{{ playlist.playlist_img.url }}">
+						<img class="preview" src="{{ playlist.playlist_img.url }}">
 						{% else %}
-						<img src="{% static 'img/no_image.png' %}">
+						<img class="preview" src="{% static 'img/no_image.png' %}">
 						{% endif %}
 					</div>
 					<div class="row">
@@ -121,7 +121,7 @@
 			<div class="col-md-3">
 				<a href="/album/{{ album.id_album }}/">	
 					<div class="row">
-						<img src="{{ album.album_img.url }}">
+						<img class="preview" src="{{ album.album_img.url }}">
 					</div>
 					<div class="row">
 						{{ album.title }}
