@@ -12,15 +12,15 @@
 				<h1 class="text-center w-100 m-auto">{{ artist.name }}</h1>
 			</div>
 			<div class="row w-100 m-0">
-				<a class="foll_count" href="/artist/{{ artist.id_artist }}/followers/"><div id="nb_followers_artist">{{ followers_count }}</div> Followers</a>
+				<a class="foll_count text-center" href="/artist/{{ artist.id_artist }}/followers/"><div id="nb_followers_artist">{{ followers_count }}</div> Followers</a>
 			</div>
 			{% if not follows %}
 			<div class="row w-100 m-0">
-				<button id="follow_artist" data-id="{{ artist.id_artist }}" type="button" class="btn btn-primary">Suivre</button>{% csrf_token %}
+				<button id="follow_artist" data-id="{{ artist.id_artist }}" type="button" class="btn btn-primary m-auto">Suivre</button>{% csrf_token %}
 			</div>
 			{% else %}
 			<div class="row w-100 m-0">
-				<button id="unfollow_artist" data-id="{{ artist.id_artist }}" type="button" class="btn btn-secondary">Ne plus suivre</button>{% csrf_token %}
+				<button id="unfollow_artist" data-id="{{ artist.id_artist }}" type="button" class="btn btn-secondary m-auto">Ne plus suivre</button>{% csrf_token %}
 			</div>
 			{% endif %}
 		</div>
