@@ -71,15 +71,10 @@ body, html{
 .navbar-brand{
 	height: 100%
 }
-
-.cover{
-	position: relative;
-	overflow: hidden;
-	padding-bottom: 100%;
-}
-
 .preview{
-	position: absolute;
+	width:100%;
+	max-height: 10em;
+	min-height:10em;
 }
 
 .profile_pic{
