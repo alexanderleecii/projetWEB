@@ -36,7 +36,7 @@
 				<button id="unsave_playlist" type="button" name="{{ Playlist.id_playlist }}" class="btn btn-secondary m-auto">Retirer de sa bibliothèque</button>{% csrf_token %}
 			{% endif %}
 		{% else %}
-			<button id="update_btn" data-id="{{ Playlist.id_playlist }}" type="button" data-toggle="modal" data-target="#playlistUpdateModal" class="btn btn-secondary">
+			<button id="update_btn" data-id="{{ Playlist.id_playlist }}" type="button" data-toggle="modal" data-target="#playlistUpdateModal" class="btn btn-secondary ml-auto mr-0">
 				Modifier la playlist
 			</button>
 			<div class="modal fade" id="playlistUpdateModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -70,7 +70,7 @@
 				</div>
 			</div>
 
-			<button id="delete_btn" data-id="{{ Playlist.id_playlist }}" type="button" data-toggle="modal" data-target="#playlistDeleteModal" class="btn btn-danger">
+			<button id="delete_btn" data-id="{{ Playlist.id_playlist }}" type="button" data-toggle="modal" data-target="#playlistDeleteModal" class="btn btn-danger mr-auto ml-0">
 				Supprimer la playlist
 			</button>
 			<div class="modal fade" id="playlistDeleteModal" tabindex="-1" role="dialog" aria-hidden="true">
