@@ -58,8 +58,8 @@
 			<div class="col-md-3">
 				<div class="row">
 					{% if user.id_user|stringformat:"i" == request.COOKIES.id %}
-					<button type="button" data-toggle="modal" data-target="#playlistModal">
-						<img class="preview" src="{% static 'user/img/display_playlist/' %}add_to_playlist.png" class="w-50 h-90">
+					<button class="preview" type="button" class="btn" data-toggle="modal" data-target="#playlistModal">
+						<img class="preview" src="{% static 'user/img/display_playlist/' %}add_to_playlist.png">
 					</button>
 					<div class="modal fade" id="playlistModal" tabindex="-1" role="dialog" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered" role="document">
