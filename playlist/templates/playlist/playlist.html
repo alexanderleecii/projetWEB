@@ -4,8 +4,7 @@
 {% block pagecontent %}
 <div id="id_playlist" hidden>{{ Playlist.id_playlist }}</div>
 <div class="container p-0">
-	<div class="row w-100 m-0">
-		<div id="playlist_header">
+		<div class="row w-100 m-0">
 			<div class="row w-100 m-0">
 				{% if Playlist.playlist_img %}
 				<img class="profile_pic" data-target="img" src="{{ Playlist.playlist_img.url }}" alt="{{ Playlist.name }}">
@@ -17,7 +16,7 @@
 				<h1 data-target="name" class="text-center w-100 m-auto">{{ Playlist.name }}</h1>
 			</div>
 			<div class="row w-100 m-0">
-				<p data-target="description" >{{ Playlist.description }}</p>
+				<p data-target="description" class="m-auto">{{ Playlist.description }}</p>
 			</div>
 			<div class="row w-100 m-0">
 				<div class="col-6 w-100 p-0 m-auto text-center">
