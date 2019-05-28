@@ -4,15 +4,15 @@
 {% block pagecontent %}
 <div class="container p-0">
 	<div class="row w-100 m-0">
-		<div class="col-md-1">
+		<div class="row w-100 m-0">
 			<img class="profile_pic" src="{{ artist.photo.url }}">
 		</div>
-		<div class="col-md-11">
+		<div class="row w-100 m-0">
 			<div class="row w-100 m-0">
 				<h1 class="text-center w-100 m-auto">{{ artist.name }}</h1>
 			</div>
 			<div class="row w-100 m-0">
-				<a href="/artist/{{ artist.id_artist }}/followers/"><div id="nb_followers_artist">{{ followers_count }}</div> Followers</a>
+				<a class="foll_count" href="/artist/{{ artist.id_artist }}/followers/"><div id="nb_followers_artist">{{ followers_count }}</div> Followers</a>
 			</div>
 			{% if not follows %}
 			<div class="row w-100 m-0">
