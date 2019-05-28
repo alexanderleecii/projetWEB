@@ -98,7 +98,9 @@ body, html{
 }
 .mainsection a{
 	color:#545353;
+	font-weight: bold;
 }
 .mainsection a:hover{
-	color:#4f3f3f;
+	color:#492727;
+	text-decoration: none;
 }
