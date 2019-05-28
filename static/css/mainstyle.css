@@ -81,6 +81,7 @@ body, html{
 
 .preview:hover{
 	opacity: 0.6;
+	transition: .5s;
 }
 
 .profile_pic{
