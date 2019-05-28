@@ -109,3 +109,11 @@ body, html{
 	color:#492727;
 	text-decoration: none;
 }
+
+.songslist{
+	min-height: 40vw;
+}
+
+.songslist table{
+	margin-top: 2% !important;
+}
