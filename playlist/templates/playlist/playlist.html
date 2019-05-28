@@ -32,9 +32,9 @@
 		<div class="row w-100 m-0">
 		{% if Playlist.creator_id|stringformat:"i" != request.COOKIES.id %}
 			{% if not has_saved %}
-				<button id="save_playlist" type="button" name="{{ Playlist.id_playlist }}" class="btn btn-primary">Sauvegarder</button>{% csrf_token %}
+				<button id="save_playlist" type="button" name="{{ Playlist.id_playlist }}" class="btn btn-primary m-auto">Sauvegarder</button>{% csrf_token %}
 			{% else %}
-				<button id="unsave_playlist" type="button" name="{{ Playlist.id_playlist }}" class="btn btn-secondary">Retirer de sa bibliothèque</button>{% csrf_token %}
+				<button id="unsave_playlist" type="button" name="{{ Playlist.id_playlist }}" class="btn btn-secondary m-auto">Retirer de sa bibliothèque</button>{% csrf_token %}
 			{% endif %}
 		{% else %}
 			<button id="update_btn" data-id="{{ Playlist.id_playlist }}" type="button" data-toggle="modal" data-target="#playlistUpdateModal" class="btn btn-secondary">
