@@ -221,7 +221,7 @@ $(document).ready(function(){
 			}
 		});
  	});
-	$('.mainsection').click(function(){
+	$('.mainsection:not(#search_module)').click(function(){
 	    $('#result').html('');
 	    $('#results').hide();
 	});
