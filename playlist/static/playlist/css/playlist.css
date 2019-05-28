@@ -1,3 +1,13 @@
 #save_playlist, #unsave_playlist{
 	width: 12%;
 }
+
+#update_btn{
+	margin-right:0;
+	margin-left: auto;
+}
+
+#delete_btn{
+	margin-left: 0;
+	margin-right: auto;
+}
