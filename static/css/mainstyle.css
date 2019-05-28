@@ -97,5 +97,8 @@ body, html{
 	padding: 0;
 }
 .mainsection a{
-	color:#2f2f2f;
+	color:#545353;
+}
+.mainsection a:hover{
+	color:#4f3f3f;
 }
