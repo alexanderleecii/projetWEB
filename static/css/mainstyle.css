@@ -72,13 +72,13 @@ body, html{
 	height: 100%
 }
 .preview{
-	width:15em;
-	height:15em;
+	width:100%;
+	min-height:10em;
 }
 
 .profile_pic{
-	width: 20em;
-	height: 20em;
+	width: 95%;
+	height: 95%;
 	margin: auto;
 }
 
