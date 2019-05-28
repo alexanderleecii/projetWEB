@@ -20,7 +20,7 @@
 				<a href="/browse/" class="navbar-brand"><img id="logo" src="{% static 'img/logo.png' %}"></a>
 				<span class="navbar-text">
 					{% if request.COOKIES.avatar %}
-					<img id="profile_miniature" src="{{ request.COOKIES.avatar }}">
+					<img id="profile_miniature" src="{{ request.COOKIES.avatar.url }}">
 					{% else %}
 					<img id="profile_miniature" src="{% static 'img/default_profile.png' %}">
 					{% endif %}
